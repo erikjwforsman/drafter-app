@@ -10,6 +10,8 @@ export const GET_TEAMS = gql`
                 nflTeam
                 position
                 price
+                bye
+                id
             }
         }
     }
@@ -36,6 +38,8 @@ export const GET_SOLDPLAYERS = gql`
             nflTeam
             position
             price
+            id
+            oldId
         }
     }
 `

@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.red{
+  background-color: #61dafb;
+} */
+
+/*APP*/
+.Flexi {
+  display: flex;
+}
+.SmallScreen{
+  flex-grow: 1;
+  background-color: royalblue;
+}
+.BigScreen{
+  flex-grow: 2;
+  background-color: salmon;
 }

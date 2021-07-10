@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import {GET_TEAMS, GET_PLAYERS, GET_SOLDPLAYERS} from "./graphql/queries"
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
+// import {GET_TEAMS, GET_PLAYERS, GET_SOLDPLAYERS} from "./graphql/queries"
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -24,17 +24,17 @@ const client = new ApolloClient({
 //   }
 // `
 
-const query = GET_SOLDPLAYERS
-
-
-client.query({query})
-  .then((response) => {
-    console.log(response.data)
-  })
+// Poisto tästä 
+// const query = GET_SOLDPLAYERS
+// client.query({query})
+//   .then((response) => {
+//     console.log(response.data)
+//   })
+//Tähän
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ApolloProvider client = {client}>
     <App />
-  </React.StrictMode>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
