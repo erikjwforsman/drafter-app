@@ -2,7 +2,7 @@ import React from "react";
 import SingleSoldPlayer from "./SingleSoldPlayer";
 
 const SingleTeam = (props) => {
-     console.log(props)
+     //console.log(props)
     // console.log(props.team.players)
 
     if (!props){

@@ -1,25 +1,26 @@
 import React from "react"
+import AvailablePlayerRow from "./AvailablePlayerRow"
 
 const FilteredPlayers = (props) => {
 
-    console.log(props)
+    //console.log(props)
     
-    if (props.filter.length >1){
-        const filteredPlayers = props.availablePlayers.filter(player => player.playerName.toLowerCase().includes(props.filter.toLowerCase()) | player.nflTeam.toLowerCase().includes(props.filter.toLowerCase()))
+    if (props.filter.length >2){
+        const filteredPlayers = props.availablePlayers.filter(player => player.playerName.toLowerCase().includes(props.filter.toLowerCase()))
         console.log(filteredPlayers)
 
         return (
-            <div>
-                {filteredPlayers.map(p => <p key={p.id}>{p.rank}. {p.playerName}</p>)}
-            </div>
+            <tbody>
+                {filteredPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+            </tbody>
         )
     }
 
     if (props.position==="ALL"){
         return (
-            <div>
-                {props.availablePlayers.map(p => <p key={p.id}>{p.rank}. {p.playerName}</p>)}
-            </div>
+            <tbody>
+                {props.availablePlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+            </tbody>
         )
     }
 
@@ -27,9 +28,9 @@ const FilteredPlayers = (props) => {
     console.log(retPlayers)
 
     return(
-        <div>
-            {retPlayers.map(p => <p key={p.id}>{p.rank}. {p.playerName}</p>)}
-        </div>
+        <tbody>
+            {retPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+        </tbody>
     )
 }
 

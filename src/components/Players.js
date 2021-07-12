@@ -23,12 +23,12 @@ const Players = (props) => {
     
     const playerList = data.allPlayers
     // console.log(playerList)
-    console.log(props)
-    console.log(position)
+    //console.log(props)
+    //console.log(position)
     const availablePlayers = playerList.filter(p => !props.soldPlayers.includes(p.id))
     availablePlayers.sort( (p1, p2) => p1.rank - p2.rank)
     //console.log(filter)
-
+    
     return(
         <div className={styles.SmallScreen}>
             <>
@@ -45,9 +45,23 @@ const Players = (props) => {
             </p>
             <p>Filter <input onChange={handleFilterChange} /></p>
             <h2>Available players:</h2>
-            <FilteredPlayers availablePlayers={availablePlayers} position={position} filter={filter}/>
             
             {/* {availablePlayers.map(p => <p key={p.id}>{p.playerName}</p>)} */}
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Pos</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">Bye</th>
+                        <th scope="col">Avg</th>
+                        <th scope="col">Queue</th>
+                    </tr>
+                </thead>
+                <FilteredPlayers availablePlayers={availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer}/>
+
+            </table>
         </div>
     )
 }

@@ -17,11 +17,11 @@ const Teams = () => {
         )
     }    
     
-    //console.log(data)
+    console.log(data.allTeams)
     if (team===null){
         return (
             <div className={styles.SmallScreen}>
-                {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner}</button>)}
+                {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
                 {/* <h2>Teams:</h2>
                 {data.allTeams.map(t => <SingleTeam team={t} key={t.id} />)} */} 
                 <SingleTeam team={data.allTeams[0]} /> 
@@ -35,7 +35,7 @@ const Teams = () => {
 
     return (
         <div className={styles.SmallScreen}>
-            {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner}</button>)}
+            {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
             {/* <h2>Teams:</h2>
             {data.allTeams.map(t => <SingleTeam team={t} key={t.id} />)} */}
             <SingleTeam team={team} key={team.id} /> 
