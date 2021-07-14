@@ -17,7 +17,7 @@ const Teams = () => {
         )
     }    
     
-    console.log(data.allTeams)
+    //console.log(data.allTeams)
     if (team===null){
         return (
             <div className={styles.SmallScreen}>
@@ -31,7 +31,7 @@ const Teams = () => {
     }
 
     //console.log(data.allTeams[0])
-    console.log(team)
+    //console.log(team)
 
     return (
         <div className={styles.SmallScreen}>

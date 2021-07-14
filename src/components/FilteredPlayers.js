@@ -4,7 +4,8 @@ import AvailablePlayerRow from "./AvailablePlayerRow"
 const FilteredPlayers = (props) => {
 
     //console.log(props)
-    
+    //Tee tästä switch-muotoinen
+
     if (props.filter.length >2){
         const filteredPlayers = props.availablePlayers.filter(player => player.playerName.toLowerCase().includes(props.filter.toLowerCase()))
         console.log(filteredPlayers)

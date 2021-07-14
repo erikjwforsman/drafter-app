@@ -22,13 +22,13 @@ const App = () => {
   //console.log(oldIds)
   //console.log(soldPlayers)
 
-  const addPlayerToQueue = (jotain) => {
-    const player = jotain
+  const addPlayerToQueue = (p) => {
+    const player = p
     console.log(player)
     setQueue([ ...queue, player])
   }
 
-  console.log(queue)
+  //console.log(queue)
   //console.log("rivi 29")
   //alive()
 
