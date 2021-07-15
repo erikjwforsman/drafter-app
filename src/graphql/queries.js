@@ -41,5 +41,17 @@ export const GET_SOLDPLAYERS = gql`
             id
             oldId
         }
+        allTeams{
+            owner
+            id
+            players{
+                playerName
+                nflTeam
+                position
+                price
+                bye
+                id
+            }
+        }
     }
 `

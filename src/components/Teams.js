@@ -7,7 +7,7 @@ import styles from "../AppStyles.module.css";
 //import ChangeTeam from "./ChangeTeam";
 
 
-const Teams = () => {
+const Teams = (props) => {
     const {data, error, loading} = useQuery(GET_TEAMS)
     const [team, setTeam] = useState(null) //Tähän voi laittaa kirjautumisen id:n myöhemmin jos haluaa
 
@@ -16,6 +16,8 @@ const Teams = () => {
             <div>loading</div>
         )
     }    
+
+    console.log(props.teams)
     
     //console.log(data.allTeams)
     if (team===null){
