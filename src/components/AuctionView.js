@@ -8,7 +8,7 @@ const AuctionView = (props) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
 
     useEffect( () => {
-        const timer = setTimeout( () => {
+        setTimeout( () => {
             if (timeLeft>0){
                 setTimeLeft(calculateTimeLeft())
             } else {

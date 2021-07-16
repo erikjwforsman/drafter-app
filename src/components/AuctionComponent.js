@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styles from "../AppStyles.module.css"
 import AuctionView from "./AuctionView";
 

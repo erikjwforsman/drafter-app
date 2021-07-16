@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {useQuery} from "@apollo/client";
-import {GET_TEAMS} from "../graphql/queries";
+// import {useQuery} from "@apollo/client";
+// import {GET_TEAMS} from "../graphql/queries";
 import SingleTeam from "./SingleTeam";
 import styles from "../AppStyles.module.css";
 
@@ -8,14 +8,14 @@ import styles from "../AppStyles.module.css";
 
 
 const Teams = (props) => {
-    const {data, error, loading} = useQuery(GET_TEAMS)
+    //const {data, error, loading} = useQuery(GET_TEAMS)
     const [team, setTeam] = useState(null) //Tähän voi laittaa kirjautumisen id:n myöhemmin jos haluaa
 
-    if(loading){
-        return(
-            <div>loading</div>
-        )
-    }    
+    // if(loading){
+    //     return(
+    //         <div>loading</div>
+    //     )
+    // }    
 
     console.log(props.teams)
     
@@ -23,10 +23,10 @@ const Teams = (props) => {
     if (team===null){
         return (
             <div className={styles.SmallScreen}>
-                {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
+                {props.teams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
                 {/* <h2>Teams:</h2>
                 {data.allTeams.map(t => <SingleTeam team={t} key={t.id} />)} */} 
-                <SingleTeam team={data.allTeams[0]} /> 
+                <SingleTeam team={props.teams[0]} /> 
 
             </div>
         )
@@ -37,7 +37,7 @@ const Teams = (props) => {
 
     return (
         <div className={styles.SmallScreen}>
-            {data.allTeams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
+            {props.teams.map(t => <button key={t.owner.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
             {/* <h2>Teams:</h2>
             {data.allTeams.map(t => <SingleTeam team={t} key={t.id} />)} */}
             <SingleTeam team={team} key={team.id} /> 

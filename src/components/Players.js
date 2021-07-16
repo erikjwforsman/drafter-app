@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import {useQuery} from "@apollo/client";
 import {GET_PLAYERS} from "../graphql/queries";
 import styles from "../AppStyles.module.css"
-import ChangePosition from "./ChangePosition";
+// import ChangePosition from "./ChangePosition";
 import FilteredPlayers from "./FilteredPlayers";
 
+
+//Tavallaan API joten pidetään omana querynä
 const Players = (props) => {
     const {data, error, loading} = useQuery(GET_PLAYERS)
     //const {data2, error2, loading2} = useQuery(GET_SOLDPLAYERS)
@@ -59,7 +61,7 @@ const Players = (props) => {
                         <th scope="col">Queue</th>
                     </tr>
                 </thead>
-                <FilteredPlayers availablePlayers={availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer}/>
+                <FilteredPlayers availablePlayers={availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate}/>
 
             </table>
         </div>

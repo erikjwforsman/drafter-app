@@ -12,7 +12,7 @@ const FilteredPlayers = (props) => {
 
         return (
             <tbody>
-                {filteredPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+                {filteredPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
             </tbody>
         )
     }
@@ -20,7 +20,7 @@ const FilteredPlayers = (props) => {
     if (props.position==="ALL"){
         return (
             <tbody>
-                {props.availablePlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+                {props.availablePlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
             </tbody>
         )
     }
@@ -30,7 +30,7 @@ const FilteredPlayers = (props) => {
 
     return(
         <tbody>
-            {retPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer}/>)}
+            {retPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
         </tbody>
     )
 }
