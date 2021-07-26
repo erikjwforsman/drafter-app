@@ -6,6 +6,7 @@ const AuctionView = (props) => {
         return (endTime-Date.now())/1000
     }
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
+    const [price, setPrice] = useState(props.currentBid!==null ? props.currentBid.currentPrice : 1)
 
     useEffect( () => {
         setTimeout( () => {
@@ -17,12 +18,12 @@ const AuctionView = (props) => {
         }, 1000)
     })
 
-    const plus10 = () => {
-        //console.log("TEST")
-        if(endTime-Date.now()<10000){
-            setEndTime(Date.now()+12000)
-        }
-    }    
+    // const plus10 = () => {
+    //     //console.log("TEST")
+    //     if(endTime-Date.now()<10000){
+    //         setEndTime(Date.now()+12000)
+    //     }
+    // }    
     
     const sold = () => {
         if (endTime<Date.now()){
@@ -33,12 +34,21 @@ const AuctionView = (props) => {
     //     console.log("ACTION!!!")
     // }
 
-    //console.log(props)
+    console.log(props)
+    const plusOne = () => {
+        setPrice(price+1)
+        console.log("NEW PRICE, ", price)
+    }
+    if (props.currentBid===null){
+        return <h2>Waiting</h2>
+    }
+
     return (
         <div>
                 <h2>Countdown</h2>
-                <h3>{Math.trunc(timeLeft)}</h3>
-                <button onClick={()=>plus10()}>+10sek</button>
+                <h3>Price: {price} Timeleft: {Math.trunc(timeLeft)}</h3>
+                {/* <button onClick={()=>plus10()}>+10sek</button> */}
+                <button onClick={()=>plusOne()}>Bid +1</button>
                 <button onClick={ () => sold() }>Sold</button>
         </div>
     )

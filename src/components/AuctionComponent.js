@@ -5,7 +5,7 @@ import AuctionView from "./AuctionView";
 
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
-
+    
        // console.log(filteredQueue)
 
     // const removeFromQueue = (removeThis) => {
@@ -17,13 +17,7 @@ const AuctionComponent = (props) => {
     return(
         
         <div className={styles.BigScreen}>
-            <div>
-                <h2>Sold Players: (Tähän tulee myyntikohta)</h2>
-                {props.soldPlayers.map(p => <p key={p.playerName}>{p.playerName}</p>)}
-            </div>
-                
-                <AuctionView playerQueue={filteredQueue}/>
-
+            <AuctionView playerQueue={filteredQueue} currentBid={props.currentBid}/>
             <div>
                 <h2>Jono</h2>
                 {filteredQueue.map(p => <p key={p.id}>{p.playerName} <button onClick={ () => props.callBackRemove(p.id)}>Remove</button></p>)}

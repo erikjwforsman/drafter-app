@@ -53,5 +53,22 @@ export const GET_SOLDPLAYERS = gql`
                 id
             }
         }
+        lastProposer{
+            proposer
+        }
+        currentBid{
+            bidder
+            currentPrice
+            timeLeft
+            player{
+                playerName
+                nflTeam
+                rank
+                expectedValue
+                position
+                bye
+            }
+        }
+
     }
 `

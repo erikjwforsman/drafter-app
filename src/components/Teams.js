@@ -17,7 +17,7 @@ const Teams = (props) => {
     //     )
     // }    
 
-    console.log(props.teams)
+    //console.log(props.teams)
     
     //console.log(data.allTeams)
     if (team===null){

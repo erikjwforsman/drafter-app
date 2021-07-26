@@ -74,7 +74,7 @@ const App = () => {
       <button onClick={()=>start()}>start</button>
       <div className={styles.Flexi}>
         <Players soldPlayers={oldIds} addPlayer={addPlayerToQueue} nominate={nominate}/>
-        <AuctionComponent soldPlayers={soldPlayers} playerQueue={queue} callBackRemove={callBackRemove}/>
+        <AuctionComponent soldPlayers={soldPlayers} playerQueue={queue} callBackRemove={callBackRemove} currentBid={data.currentBid}/>
         <Teams teams={data.allTeams}/>
       </div>
       
