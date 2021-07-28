@@ -2,35 +2,32 @@ import React, {useState} from "react";
 import {useQuery} from "@apollo/client";
 import {GET_PLAYERS} from "../graphql/queries";
 import styles from "../AppStyles.module.css"
-// import ChangePosition from "./ChangePosition";
 import FilteredPlayers from "./FilteredPlayers";
 
 
-//Tavallaan API joten pidetään omana querynä
 const Players = (props) => {
-    const {data, error, loading} = useQuery(GET_PLAYERS)
-    //const {data2, error2, loading2} = useQuery(GET_SOLDPLAYERS)
+    console.log(props.availablePlayers)
+    //return(<div className={styles.SmallScreen}>Players WIP</div>)
+
     const [position, setPosition] = useState("ALL")
     const [filter, setFilter] = useState("")
 
-
-    if (loading ){
-        return <div>loading...</div>
-    }
 
     const handleFilterChange = (event) => {
         console.log(event.target.value)
         setFilter(event.target.value)
     }
     
-    const playerList = data.allPlayers
-    // console.log(playerList)
-    //console.log(props)
-    //console.log(position)
-    const availablePlayers = playerList.filter(p => !props.soldPlayers.includes(p.id))
-    availablePlayers.sort( (p1, p2) => p1.rank - p2.rank)
-    //console.log(filter)
-    
+    // const playerList = data.allPlayers
+    // // console.log(playerList)
+    // //console.log(props)
+    // //console.log(position)
+    // const availablePlayers = playerList.filter(p => !props.soldPlayers.includes(p.id))
+    // availablePlayers.sort( (p1, p2) => p1.rank - p2.rank)
+    // //console.log(filter)
+    // props.nominate(availablePlayers[0])
+    // //console.log(availablePlayers[0])
+
     return(
         <div className={styles.SmallScreen}>
             <>
@@ -61,7 +58,7 @@ const Players = (props) => {
                         <th scope="col">Queue</th>
                     </tr>
                 </thead>
-                <FilteredPlayers availablePlayers={availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate}/>
+                <FilteredPlayers availablePlayers={props.availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate}/>
 
             </table>
         </div>

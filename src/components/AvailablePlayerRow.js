@@ -13,7 +13,7 @@ const AvailablePlayerRow = (props) => {
             <td>{props.player.bye}</td>
             <td>${props.player.expectedValue}</td>
             <td><button onClick={()=>props.addPlayer(props.player)}>Add</button></td>
-            <td><button onClick={()=>props.nominate()}>Auction</button></td>
+            <td><button onClick={()=>props.nominate(props.player)}>Auction</button></td>
 
 
 

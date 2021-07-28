@@ -31,8 +31,17 @@ export const GET_PLAYERS = gql`
     }
 `
 
-export const GET_SOLDPLAYERS = gql`
+export const GET_ALL = gql`
     query{
+        allPlayers{
+            playerName
+            nflTeam
+            rank
+            expectedValue
+            position
+            bye
+            id
+        }
         allSoldPlayers{
             playerName
             nflTeam
@@ -44,6 +53,7 @@ export const GET_SOLDPLAYERS = gql`
         allTeams{
             owner
             id
+            place
             players{
                 playerName
                 nflTeam
