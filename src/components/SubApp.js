@@ -3,6 +3,8 @@ import SelfInfo from "./SelfInfo";
 import Players from "./Players"
 import AuctionComponent from "./AuctionComponent"
 import Teams from "./Teams";
+import {useMutation, useQuery} from "@apollo/client";
+import {CHANGE_PROPOSER, CHANGE_BID, GET_ALL, ADD_TEAM, SELL_PLAYER, ADD_PLAYER} from "../graphql/queries";
 
 import styles from "../AppStyles.module.css"
 
@@ -11,26 +13,35 @@ const SubApp = (props) => {
     console.log(props.data)
     const [queue, setQueue] = useState([])
     const [playerToNominate, setPlayerToNominate] = useState(null)
-    const [turn, setTurn] = useState(null)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
-
+    const turn = props.data.lastProposer.proposer                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
+    
+    //
+    //Mutaatiovammailua
+    //const [eriNimi]=useMutation(ADD_TEAM)//, {  //OK!!!
+    //   refetchQueries: GET_ALL
+    // })
+    const [changeBid] = useMutation(CHANGE_BID)
+    //const [changeTurn] = useMutation(CHANGE_PROPOSER)//OK!!!
+    //const [sellPlayer] = useMutation(SELL_PLAYER) //OK!!!
+    //const [addPlayer] = useMutation(ADD_PLAYER) //OK!!!
+    //console.log(turn)
     const WIPmanager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
+    // console.log(props.data.currentBid)
 
-    const start = () =>{      //SubAppiin?
-        //Alustava rakennelma, lopullinen tulee useQueryn viimeisen tarjouksen og ehdottajasta
-        // const lastToNominate = "60e596cbef2cab7f604fc1eb"
-        // let index = data.allTeams.findIndex(team => team.id === lastToNominate)
-        // console.log(index)
-        // console.log(data.allTeams.length)
-        // if (index+1===data.allTeams.length){
-        // index+=1
-        // }
-
-        // setTurn(data.allTeams[index])
-        console.log(turn)
-        // if(props.data.allSoldPlayers.length===0 | turn==="Kape"){
-        //     setTurn(props.data.allTeams[0].owner)
-        // } else if()
-        // console.log(turn)
+    //const playerToSell = {owner: "6103be19710deb0bac329658", playerName: "Buccaneers", nflTeam:"TB", position:"D", oldId:"60e95ec9c92610e6181ad911", price:3, bye:8}
+    // console.log(playerToSell)
+    //const newPlayer = {playerName:"Josh Allen", nflTeam:"JAX", rank:287, expectedValue:1, position:"IDP", bye:7}
+    // console.log(newPlayer)
+    const newBid = {playerId:"6103f7c9cf16687025c8cffa", bidder: "6103bcdb710deb0bac329655", currentPrice:10}
+    //console.log(newBid)
+    const start = async() =>{      
+        changeBid({ variables: newBid })
+        //joukkueen lisäys kovakoodilla
+        //eriNimi({ variables: {owner:"Simon", place:11} })
+        //changeTurn() 
+        //sellPlayer( { variables:  playerToSell } )
+        //addPlayer({ variables: newPlayer })
+        console.log("Vielä elossa")
     }
 
     //#######################################

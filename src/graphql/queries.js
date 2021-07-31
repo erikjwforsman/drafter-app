@@ -82,3 +82,49 @@ export const GET_ALL = gql`
 
     }
 `
+export const ADD_TEAM = gql`
+    mutation addTeam($owner:String!, $place: Int){
+        addTeam(owner:$owner, place:$place){
+            owner
+        }
+    }
+`
+
+// export const CHANGE_PROPOSER = gql`
+//     mutation changeProposer($current:Int){
+//         changeProposer(current:$current){
+//             current
+//         }
+//     }
+// `
+export const CHANGE_PROPOSER = gql`
+    mutation changeProposer{
+        changeProposer{
+            proposer
+        }
+    }
+`
+
+export const CHANGE_BID = gql`
+    mutation changeBid($bidder: String!, $playerId: String!, $currentPrice:Int, $timeLeft:String){
+        changeBid(bidder:$bidder, playerId:$playerId, currentPrice:$currentPrice, timeLeft: $timeLeft){
+            currentPrice
+        }
+    }
+`
+
+export const SELL_PLAYER = gql`
+    mutation sellPlayer($owner:String!, $playerName:String!, $nflTeam:String!, $position:String!, $price:Int!, $oldId:String!, $bye:Int!){
+        addSoldPlayer(owner: $owner, playerName: $playerName, nflTeam:$nflTeam, position:$position, price:$price, oldId:$oldId, bye:$bye){
+            playerName
+        }
+    }
+`
+
+export const ADD_PLAYER = gql`
+    mutation addPlayer($playerName: String!, $nflTeam: String!, $rank: Int!, $expectedValue: Int!, $position: String!, $bye: Int!){
+        addPlayer(playerName:$playerName, nflTeam:$nflTeam, rank:$rank, expectedValue:$expectedValue, position:$position, bye:$bye){
+            playerName
+        }
+    }
+`

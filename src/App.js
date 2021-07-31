@@ -15,9 +15,9 @@ const App = () => {
     console.log(error)
   }
 
-  console.log(data)
+  //console.log(data)
 
-  return(<div>WIP</div>)
+  // return(<div>WIP</div>)
   return(<SubApp data={data} manager={manager}/>)
 }
 
