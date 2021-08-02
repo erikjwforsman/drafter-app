@@ -1,3 +1,4 @@
+//import { stripIgnoredCharacters } from "graphql"
 import React, {useState, useEffect} from "react"
 
 const AuctionView = (props) => {
@@ -25,7 +26,7 @@ const AuctionView = (props) => {
             console.log(Date.now())
         }
     }
-
+    //console.log(props)
     //console.log(props.playerToNominate)
     // const plusOne = () => {
     //     setPrice(price+1)
@@ -43,6 +44,7 @@ const AuctionView = (props) => {
             </div>
         )
     }
+
 
     return (
         <div>

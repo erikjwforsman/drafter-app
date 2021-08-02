@@ -14,10 +14,13 @@ const AuctionComponent = (props) => {
     //     console.log("Uusi", filteredQueue)
     // }
 
+    console.log(props)
+
     return(
         
         <div className={styles.BigScreen}>
-            <AuctionView playerQueue={filteredQueue} currentBid={props.currentBid} playerToNominate={props.playerToNominate} />
+            <h2>Vuoro: </h2>
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} />
             <div>
                 <h2>Jono</h2>
                 {filteredQueue.map(p => <p key={p.id}>{p.playerName} <button onClick={ () => props.callBackRemove(p.id)}>Remove</button></p>)}

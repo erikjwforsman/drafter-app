@@ -6,7 +6,7 @@ import FilteredPlayers from "./FilteredPlayers";
 
 
 const Players = (props) => {
-    console.log(props.availablePlayers)
+    //console.log(props.availablePlayers)
     //return(<div className={styles.SmallScreen}>Players WIP</div>)
 
     const [position, setPosition] = useState("ALL")
