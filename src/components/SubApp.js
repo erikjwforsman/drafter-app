@@ -11,7 +11,7 @@ import styles from "../AppStyles.module.css"
 
 const SubApp = (props) => {
 
-    console.log(props.data)
+    //console.log(props.data)
     const [queue, setQueue] = useState([])
     const nominatedPlayer = props.data.currentBid
 
@@ -19,13 +19,18 @@ const SubApp = (props) => {
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
-    console.log(props)
-    console.log(turn)
-    
-    const start = async() =>{     
-        changeTurn() 
-    }
+       
+    const start = async(value) =>{
+      //value periytyy AuctionComponentin finalizeSalesta ja kiertää startin varmennuksen
+      if (value===true){
+        changeTurn()
+      } else {
+        if(window.confirm("Ethän painanut vahingossa?")){
+          changeTurn()
+        }        
+      }         
 
+    }
     //#######################################
     //#######################################
     //Playersin funkitiot ja propsit
@@ -54,7 +59,7 @@ const SubApp = (props) => {
           <SelfInfo manager={manager} start={start}/>
           <div className={styles.Flexi}>
             <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate}/>
-            <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} />
+            <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start}/>
             <Teams teams={props.data.allTeams} manager={manager}/>
           </div>
           

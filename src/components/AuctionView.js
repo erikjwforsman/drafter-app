@@ -7,7 +7,7 @@ const AuctionView = (props) => {
         return (endTime-Date.now())/1000
     }
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
-    const [price, setPrice] = useState("WIP")//props.currentBid!==null ? props.currentBid.currentPrice : 1)
+    const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
     const [bid, setBid] = useState(null)
 
     useEffect( () => {
@@ -32,24 +32,19 @@ const AuctionView = (props) => {
     //     setPrice(price+1)
     //     console.log("NEW PRICE, ", price)
     // }
-    if (props.currentBid===null){
-        if (props.playerToNominate===null){
-            return(<div>Loading</div>)
-        }
-
-        return (
+    if (playerBeingSold===null){
+        return(
             <div>
-                <h2>Waiting</h2>
-                <p>{props.playerToNominate.playerName}</p>
+                Waiting for {props.turn.owner}
             </div>
         )
     }
 
-
+    //console.log(props)
     return (
         <div>
                 <h2>Countdown</h2>
-                <h3>Price: {price} Timeleft: {Math.trunc(timeLeft)}</h3>
+                <h3>Price: {playerBeingSold.currentPrice} Timeleft: {Math.trunc(timeLeft)}</h3>
                 {/* <button onClick={()=>plus10()}>+10sek</button> */}
                 {/* <button onClick={()=>plusOne()}>Bid +1</button> */}
                 <button onClick={ () => sold() }>Sold</button>

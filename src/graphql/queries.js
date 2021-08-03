@@ -77,6 +77,7 @@ export const GET_ALL = gql`
                 expectedValue
                 position
                 bye
+                id
             }
         }
 
@@ -105,6 +106,7 @@ export const CHANGE_PROPOSER = gql`
     }
 `
 
+//bidder tarkoitaa bidderin id:tä
 export const CHANGE_BID = gql`
     mutation changeBid($bidder: String!, $playerId: String!, $currentPrice:Int, $timeLeft:String){
         changeBid(bidder:$bidder, playerId:$playerId, currentPrice:$currentPrice, timeLeft: $timeLeft){
