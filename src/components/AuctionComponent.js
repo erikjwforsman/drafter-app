@@ -3,6 +3,7 @@ import styles from "../AppStyles.module.css"
 import AuctionView from "./AuctionView";
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
+import {teamInfo, validateBid} from "../utils/teamUtils"
 
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
@@ -10,6 +11,11 @@ const AuctionComponent = (props) => {
     const [sellPlayer] = useMutation(SELL_PLAYER)
     const [customBid, setCustomBid] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 2) 
  
+
+    //props.manager kohdentaa
+    const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
+    //console.log(managerRestrictions)
+    //console.log(props.nominatedPlayer.currentPrice)
     //console.log(customBid)
     // console.log(filteredQueue)
 
@@ -19,25 +25,38 @@ const AuctionComponent = (props) => {
     //     console.log("Uusi", filteredQueue)
     // }
 
-    //console.log(props)
-    console.log(props)
+    //console.log(props.nominatedPlayer.currentPrice)
     //console.log(customBid)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
 
     const bidPlusOne = async(team) => {
-        console.log("New Bid!", team.owner)
-        //console.log(props.nominatedPlayer)
-        const newestBid= {bidder:team.id, playerId:props.nominatedPlayer.player.id, currentPrice:currentBidPlusOne }
-        console.log(newestBid) 
-        bid({ variables: newestBid })
+        const newestBid= {bidder:team.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(currentBidPlusOne) }
+        const curManager = props.teams.find(t => t.id === team.id)
+        //console.log(curManager)
+        //console.log(curManager)
+        const curManagerRestrictions=teamInfo(curManager.players.length, curManager.salary)
+        //console.log(curManagerRestrictions)
+        if(validateBid(props.nominatedPlayer, newestBid, curManagerRestrictions)){
+            
+            //console.log(newestBid)
+            bid({ variables: newestBid })
+        } else {
+            console.log("Virheilmoitus")
+        }
+
     }
 
 
     const submit = async(event) => {
         event.preventDefault()
+        
         const newestBid= {bidder:props.manager.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(customBid) }
-        console.log(newestBid)
-        bid({ variables: newestBid })
+        if(validateBid(props.nominatedPlayer, newestBid, managerRestrictions)){
+            bid({ variables: newestBid })
+        } else {
+            console.log("Virheilmoitus")
+        }
+        
     }
 
     const finalizeSale = async()=> {
@@ -56,7 +75,10 @@ const AuctionComponent = (props) => {
         await props.start(true)
         //{owner: "6103be19710deb0bac329658", playerName: "Buccaneers", nflTeam:"TB", position:"D", oldId:"60e95ec9c92610e6181ad911", price:3, bye:8}
     }
-
+//| props.nominatedPlayer.currentPrice>=managerRestrictions.maxBid
+//| props.nominatedPlayer.bidder===props.manager.id
+    console.log(props.nominatedPlayer)
+    console.log(props.manager)
     return(
         
         <div className={styles.BigScreen}>
@@ -72,7 +94,7 @@ const AuctionComponent = (props) => {
                         onChange={ ({target}) => setCustomBid(target.value)}
                     />
                 </div>
-                <button disabled={props.nominatedPlayer===null} type="submit">bid</button>
+                <button disabled={props.nominatedPlayer===null } type="submit">bid</button>
             </form>
             
             {props.manager.owner==="Erik" &&

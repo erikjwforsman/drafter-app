@@ -1,13 +1,15 @@
 import React from "react";
 import SingleSoldPlayer from "./SingleSoldPlayer";
+import {teamInfo} from "../utils/teamUtils"
 
 const SingleTeam = (props) => {
      //console.log(props)
     // console.log(props.team.players)
 
-    if (!props){
-        console.log("Toimii")
-    }
+    //console.log(props)
+
+    const info = teamInfo(props.team.players.length, props.team.salary)
+    //console.log(info)
 
     if (!props){
         return <div>Testi onnistui</div>
@@ -16,8 +18,12 @@ const SingleTeam = (props) => {
     return (
         <div>
             <h3><strong>{props.team.owner}</strong></h3>
-            <h3>Roster size: {props.team.players.length}/19</h3>
-            <h3>Rahaa jäljellä ja avg hinta</h3>
+            <h3>Roster size: {info.maxRosterSize-info.seatsLeft}/19</h3>
+            <h3>Money left: {info.moneyLeft}</h3>
+            <h3>Avg Price: {info.avgPrice}</h3>
+            <h3>Max Bid: {info.maxBid}</h3>
+
+
             <h3>QB:</h3>
             {props.team.players.filter(p => p.position==="QB").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
             <h3>RB:</h3>

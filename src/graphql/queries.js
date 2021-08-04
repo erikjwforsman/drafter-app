@@ -54,6 +54,7 @@ export const GET_ALL = gql`
             owner
             id
             place
+            salary
             players{
                 playerName
                 nflTeam

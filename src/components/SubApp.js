@@ -19,7 +19,8 @@ const SubApp = (props) => {
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
-       
+    
+    //console.log(props.data.allTeams)
     const start = async(value) =>{
       //value periytyy AuctionComponentin finalizeSalesta ja kiertää startin varmennuksen
       if (value===true){
