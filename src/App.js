@@ -1,12 +1,14 @@
-//import useTeams from "./hooks/useTeams"
-import {useState} from "react"
+import React, {useState} from "react"
 import {useQuery} from "@apollo/client";
 import {GET_ALL} from "./graphql/queries";
 import SubApp from "./components/SubApp";
 
 const App = () => {
-  const {data, error, loading} = useQuery(GET_ALL)
-  const [manager, setManager] = useState("Erik")//Noudetaan sisäänkirjautujasta, ehkä SubAppiin?
+  const {data, error, loading} = useQuery(GET_ALL, {
+     pollInterval: 1000
+  })
+  //console.log(data)
+  const [manager, setManager] = useState("Erik")
 
   if (loading ){
     return <div>loading...</div>

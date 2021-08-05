@@ -3,7 +3,7 @@ import styles from "../AppStyles.module.css"
 import AuctionView from "./AuctionView";
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
-import {teamInfo, validateBid} from "../utils/teamUtils"
+import {teamInfo, validateBid, bidButtonDisabled} from "../utils/teamUtils"
 
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
@@ -11,11 +11,11 @@ const AuctionComponent = (props) => {
     const [sellPlayer] = useMutation(SELL_PLAYER)
     const [customBid, setCustomBid] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 2) 
  
-
+    console.log(props)
     //props.manager kohdentaa
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
     //console.log(managerRestrictions)
-    //console.log(props.nominatedPlayer.currentPrice)
+    
     //console.log(customBid)
     // console.log(filteredQueue)
 
@@ -75,10 +75,15 @@ const AuctionComponent = (props) => {
         await props.start(true)
         //{owner: "6103be19710deb0bac329658", playerName: "Buccaneers", nflTeam:"TB", position:"D", oldId:"60e95ec9c92610e6181ad911", price:3, bye:8}
     }
+    //console.log(props.nominatedPlayer.currentPrice>=managerRestrictions.maxBid)
 //| props.nominatedPlayer.currentPrice>=managerRestrictions.maxBid
 //| props.nominatedPlayer.bidder===props.manager.id
-    console.log(props.nominatedPlayer)
-    console.log(props.manager)
+//console.log(props.nominatedPlayer===null)
+    console.log(props)
+    console.log(bidButtonDisabled(props.nominatedPlayer, props.manager))
+
+    //console.log(props.nominatedPlayer)
+    //console.log(props.manager)
     return(
         
         <div className={styles.BigScreen}>
@@ -86,7 +91,7 @@ const AuctionComponent = (props) => {
             <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn}/>
 
             <h2>Manager tools</h2>
-            <button disabled={props.nominatedPlayer===null} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
+            <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
             <form onSubmit={submit}>
                 <div>
                     Custom bid <input
@@ -94,14 +99,14 @@ const AuctionComponent = (props) => {
                         onChange={ ({target}) => setCustomBid(target.value)}
                     />
                 </div>
-                <button disabled={props.nominatedPlayer===null } type="submit">bid</button>
+                <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true } type="submit">bid</button>
             </form>
             
             {props.manager.owner==="Erik" &&
                 <div>
                 <h2>Commish tool</h2>
                 <button disabled={props.nominatedPlayer===null} onClick={()=>finalizeSale()}>Finalize sale</button>
-                { props.teams.map(t => <p key={t.id}>{t.owner} <button disabled={props.nominatedPlayer===null} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button></p>) }
+                { props.teams.map(t => <p key={t.id}>{t.owner} <button disabled={bidButtonDisabled(props.nominatedPlayer, t)!==true} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button></p>) }
                 </div>
             }
             

@@ -53,7 +53,32 @@ export const validateBid = (currentBid, newBid, managerRestrictions) => {
     } else {
         //console.log("Valmis")
         return true
+    }  
+}
+
+export const bidButtonDisabled = (nominatedPlayer, manager) => {
+    const seatsLeft=19-manager.players.length
+    const moneyLeft = 200-manager.salary 
+    const manMaxBid=moneyLeft-seatsLeft+1
+
+    if (manager.players.length>=19){
+        console.log("Joukkue täynnä")
+        return false
     }
 
+    if (nominatedPlayer===null){
+        console.log("Player Null")   
+        return false
+    }
+    if(nominatedPlayer.currentPrice>=manMaxBid){
+        console.log("Out of money")
+        return false
+    }
+    if(nominatedPlayer.bidder===manager.id){
+        console.log("Already highest bid")
+        return false
+    }
     
-}
+    return true
+
+} 
