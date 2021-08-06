@@ -4,9 +4,9 @@ import {GET_ALL} from "./graphql/queries";
 import SubApp from "./components/SubApp";
 
 const App = () => {
-  const {data, error, loading} = useQuery(GET_ALL, {
-     pollInterval: 1000
-  })
+  const {data, error, loading} = useQuery(GET_ALL)//, {
+  //     pollInterval: 1000
+  //  })
   //console.log(data)
   const [manager, setManager] = useState("Erik")
 

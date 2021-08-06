@@ -3,7 +3,7 @@ import styles from "../AppStyles.module.css"
 import AuctionView from "./AuctionView";
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
-import {teamInfo, validateBid, bidButtonDisabled} from "../utils/teamUtils"
+import {teamInfo, validateBid, bidButtonDisabled, playerNextInLine} from "../utils/teamUtils"
 
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
@@ -12,55 +12,31 @@ const AuctionComponent = (props) => {
     const [customBid, setCustomBid] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 2) 
  
     console.log(props)
-    //props.manager kohdentaa
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
-    //console.log(managerRestrictions)
-    
-    //console.log(customBid)
-    // console.log(filteredQueue)
-
-    // const removeFromQueue = (removeThis) => {
-    //     const ret = filteredQueue.filter(p => p.id !== removeThis)
-    //     filteredQueue = ret
-    //     console.log("Uusi", filteredQueue)
-    // }
-
-    //console.log(props.nominatedPlayer.currentPrice)
-    //console.log(customBid)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
 
     const bidPlusOne = async(team) => {
         const newestBid= {bidder:team.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(currentBidPlusOne) }
         const curManager = props.teams.find(t => t.id === team.id)
-        //console.log(curManager)
-        //console.log(curManager)
         const curManagerRestrictions=teamInfo(curManager.players.length, curManager.salary)
-        //console.log(curManagerRestrictions)
-        if(validateBid(props.nominatedPlayer, newestBid, curManagerRestrictions)){
-            
-            //console.log(newestBid)
+        if(validateBid(props.nominatedPlayer, newestBid, curManagerRestrictions)){            
             bid({ variables: newestBid })
         } else {
-            console.log("Virheilmoitus")
+            console.log("Virheilmoitus") //Aktivoi virhe-ilmoitus tässä
         }
-
     }
 
-
     const submit = async(event) => {
-        event.preventDefault()
-        
+        event.preventDefault()        
         const newestBid= {bidder:props.manager.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(customBid) }
         if(validateBid(props.nominatedPlayer, newestBid, managerRestrictions)){
             bid({ variables: newestBid })
         } else {
-            console.log("Virheilmoitus")
-        }
-        
+            console.log("Virheilmoitus")   //Aktivoi virhe-ilmoitus tässä
+        }        
     }
 
     const finalizeSale = async()=> {
-        console.log("Sold!!!!!")
         const soldPlayer = {
             owner:props.nominatedPlayer.bidder, 
             playerName:props.nominatedPlayer.player.playerName, 
@@ -70,20 +46,19 @@ const AuctionComponent = (props) => {
             bye: props.nominatedPlayer.player.bye,
             price: props.nominatedPlayer.currentPrice
         }
-        console.log(soldPlayer)
         await sellPlayer({variables: soldPlayer})
-        await props.start(true)
-        //{owner: "6103be19710deb0bac329658", playerName: "Buccaneers", nflTeam:"TB", position:"D", oldId:"60e95ec9c92610e6181ad911", price:3, bye:8}
+        await props.start(true) //Turha await?
     }
-    //console.log(props.nominatedPlayer.currentPrice>=managerRestrictions.maxBid)
-//| props.nominatedPlayer.currentPrice>=managerRestrictions.maxBid
-//| props.nominatedPlayer.bidder===props.manager.id
-//console.log(props.nominatedPlayer===null)
-    console.log(props)
-    console.log(bidButtonDisabled(props.nominatedPlayer, props.manager))
 
-    //console.log(props.nominatedPlayer)
-    //console.log(props.manager)
+    //koodi auto nominationiin
+    // const Startti = 
+    // if (props.nominatedPlayer===null & Date.now()<props.nominatedPlayer.timeLeft){
+    //     const next = playerNextInLine(props.playerQueue, props.autoPick)
+    //     console.log(next)
+    // }
+
+    //Tee muualla hyväksyttävä disabled koodi finalizeSaleen
+    //props.nominatedPlayer===null | Date.now()<props.nominatedPlayer.timeLeft 
     return(
         
         <div className={styles.BigScreen}>
@@ -105,7 +80,7 @@ const AuctionComponent = (props) => {
             {props.manager.owner==="Erik" &&
                 <div>
                 <h2>Commish tool</h2>
-                <button disabled={props.nominatedPlayer===null} onClick={()=>finalizeSale()}>Finalize sale</button>
+                <button disabled={props.nominatedPlayer===null } onClick={()=>finalizeSale()}>Finalize sale</button>
                 { props.teams.map(t => <p key={t.id}>{t.owner} <button disabled={bidButtonDisabled(props.nominatedPlayer, t)!==true} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button></p>) }
                 </div>
             }

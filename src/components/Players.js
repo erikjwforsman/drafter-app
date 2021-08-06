@@ -58,7 +58,7 @@ const Players = (props) => {
                         <th scope="col">Queue</th>
                     </tr>
                 </thead>
-                <FilteredPlayers availablePlayers={props.availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate}/>
+                <FilteredPlayers availablePlayers={props.availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate}/>
 
             </table>
         </div>

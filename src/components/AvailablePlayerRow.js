@@ -1,8 +1,8 @@
 import React from "react"
 
 const AvailablePlayerRow = (props) => {
-    //console.log(props)
-    
+    // console.log(props)
+    // console.log(props.validateManagerCanNominate!==true)
 
     return (
         <tr>
@@ -13,10 +13,7 @@ const AvailablePlayerRow = (props) => {
             <td>{props.player.bye}</td>
             <td>${props.player.expectedValue}</td>
             <td><button onClick={()=>props.addPlayer(props.player)}>Add</button></td>
-            <td><button onClick={()=>props.nominate(props.player)}>Auction</button></td>
-
-
-
+            <td><button disabled={props.validateManagerCanNominate!==true} onClick={()=>props.nominate(props.player)}>Auction</button></td>
         </tr>
     )
 }

@@ -62,23 +62,42 @@ export const bidButtonDisabled = (nominatedPlayer, manager) => {
     const manMaxBid=moneyLeft-seatsLeft+1
 
     if (manager.players.length>=19){
-        console.log("Joukkue täynnä")
+        // console.log("Joukkue täynnä")
         return false
     }
 
     if (nominatedPlayer===null){
-        console.log("Player Null")   
+        // console.log("Player Null")   
         return false
     }
     if(nominatedPlayer.currentPrice>=manMaxBid){
-        console.log("Out of money")
+        // console.log("Out of money")
         return false
     }
     if(nominatedPlayer.bidder===manager.id){
-        console.log("Already highest bid")
+        // console.log("Already highest bid")
         return false
     }
-    
     return true
-
 } 
+
+export const nominateButtonDisabled = (nominatedPlayer, manager, turn) => {
+    // Aktivoi lopuksi
+    // if(manager.id!==turn.id){
+    //     return false
+    // }
+    if (nominatedPlayer===null | nominatedPlayer===undefined){
+        return true
+    }
+    
+    //Tähän vielä vuorokohtainen nomineittaus
+    return manager.id===turn.id
+}
+
+export const playerNextInLine = (playerList, nextPlayer) => {
+    if (playerList===null | playerList.length===0){
+        return nextPlayer
+    }
+
+    return playerList[0]
+}

@@ -3,7 +3,7 @@ import AvailablePlayerRow from "./AvailablePlayerRow"
 
 const FilteredPlayers = (props) => {
 
-    //console.log(props)
+    //console.log(props.validateManagerCanNominate)
     //Tee tästä switch-muotoinen
 
     if (props.filter.length >2){
@@ -12,7 +12,7 @@ const FilteredPlayers = (props) => {
 
         return (
             <tbody>
-                {filteredPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
+                {filteredPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate} />)}
             </tbody>
         )
     }
@@ -20,7 +20,7 @@ const FilteredPlayers = (props) => {
     if (props.position==="ALL"){
         return (
             <tbody>
-                {props.availablePlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
+                {props.availablePlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate} />)}
             </tbody>
         )
     }
@@ -30,7 +30,7 @@ const FilteredPlayers = (props) => {
 
     return(
         <tbody>
-            {retPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate}/>)}
+            {retPlayers.map(p => <AvailablePlayerRow key={p.id} player={p} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate} />)}
         </tbody>
     )
 }
