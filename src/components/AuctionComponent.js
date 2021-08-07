@@ -6,6 +6,8 @@ import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
 import {teamInfo, validateBid, bidButtonDisabled, playerNextInLine, finalizeSaleButtonDisabled} from "../utils/teamUtils"
 
 const AuctionComponent = (props) => {
+    //Lisää 3 sekunnin jäädytys uuden tarjouksen tullessa
+
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
     const [bid]=useMutation(CHANGE_BID)
     const [sellPlayer] = useMutation(SELL_PLAYER)
@@ -50,9 +52,9 @@ const AuctionComponent = (props) => {
         await props.start(true) //Turha await?
     }
 
-    const lähetys = () => {
-        console.log("Lähetetty takaisin päin. Nollassa ollaan.")
-        setxFinalizeSaleButton(false)
+    const lähetys = (boolean) => {
+        console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
+        setxFinalizeSaleButton(boolean)
     }
 
     //koodi auto nominationiin
@@ -68,7 +70,7 @@ const AuctionComponent = (props) => {
         
         <div className={styles.BigScreen}>
             <h2>Vuoro: </h2>
-            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={lähetys}/>
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={lähetys} xfinalizeSaleButton={xfinalizeSaleButton}/>
 
             <h2>Manager tools</h2>
             <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>

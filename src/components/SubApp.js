@@ -11,6 +11,10 @@ import styles from "../AppStyles.module.css"
 
 const SubApp = (props) => {
 
+  //HUOMHUOMHUOM
+  //Varmista että backissä on yhtaikainen cross platform validointi fronttien samanaikaisten tarjousten hyväksynnälle!!!!
+  //HUOMHUOMHUOM PÄÄTTYY
+
     //console.log(props.data)
     const [queue, setQueue] = useState([])
     const nominatedPlayer = props.data.currentBid

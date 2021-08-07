@@ -2,25 +2,34 @@
 import React, {useState, useEffect} from "react"
 
 const AuctionView = (props) => {
-    //Ei rekisteröi fronttiin alle 10 tehtyä muutosta
     //Vertaa endtime ja timeLeft erot
-    const[endTime, setEndTime] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000)//Noudetaan tarjouksesta
+    //const[endTime, setEndTime] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000)//Noudetaan tarjouksesta
+
+    //Tee backiin lisäys, jotta saadaan 8sek => 10sek
+    const endTime = props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000
     const calculateTimeLeft = () => {
         return (endTime-Date.now())/1000
     }
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
-    const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
-    //const [bid, setBid] = useState(null)
-    
+    //Tähän joku ratkaisu, että
     useEffect( () => {
         setTimeout( () => {
             if (timeLeft>0){
                 setTimeLeft(calculateTimeLeft())
+                if(props.xfinalizeSaleButton===false){
+                    props.lähetys(true)
+                }
             } else {
-                console.log("SOLD!!!")
+                setTimeLeft(calculateTimeLeft())
+                if(props.xfinalizeSaleButton===true){
+                    props.lähetys(false)
+                }       
             }
         }, 1000)
-    })   
+    })
+
+
+    const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
 
     //const [mockNappi, setMockNappi] = useState(true)
     // if (endTime<Date.now()){
