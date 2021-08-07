@@ -94,6 +94,13 @@ export const nominateButtonDisabled = (nominatedPlayer, manager, turn) => {
     return manager.id===turn.id
 }
 
+export const finalizeSaleButtonDisabled = (nominatedPlayer) => {
+    if (nominatedPlayer===null | nominatedPlayer===undefined) {
+        return true
+    }
+    return Date.now()<nominatedPlayer.timeLeft
+}
+
 export const playerNextInLine = (playerList, nextPlayer) => {
     if (playerList===null | playerList.length===0){
         return nextPlayer

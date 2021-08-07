@@ -3,14 +3,14 @@ import styles from "../AppStyles.module.css"
 import AuctionView from "./AuctionView";
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
-import {teamInfo, validateBid, bidButtonDisabled, playerNextInLine} from "../utils/teamUtils"
+import {teamInfo, validateBid, bidButtonDisabled, playerNextInLine, finalizeSaleButtonDisabled} from "../utils/teamUtils"
 
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
     const [bid]=useMutation(CHANGE_BID)
     const [sellPlayer] = useMutation(SELL_PLAYER)
     const [customBid, setCustomBid] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 2) 
- 
+    const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true)
     console.log(props)
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
@@ -50,6 +50,11 @@ const AuctionComponent = (props) => {
         await props.start(true) //Turha await?
     }
 
+    const lähetys = () => {
+        console.log("Lähetetty takaisin päin. Nollassa ollaan.")
+        setxFinalizeSaleButton(false)
+    }
+
     //koodi auto nominationiin
     // const Startti = 
     // if (props.nominatedPlayer===null & Date.now()<props.nominatedPlayer.timeLeft){
@@ -63,7 +68,7 @@ const AuctionComponent = (props) => {
         
         <div className={styles.BigScreen}>
             <h2>Vuoro: </h2>
-            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn}/>
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={lähetys}/>
 
             <h2>Manager tools</h2>
             <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
@@ -80,7 +85,7 @@ const AuctionComponent = (props) => {
             {props.manager.owner==="Erik" &&
                 <div>
                 <h2>Commish tool</h2>
-                <button disabled={props.nominatedPlayer===null } onClick={()=>finalizeSale()}>Finalize sale</button>
+                <button disabled={xfinalizeSaleButton} onClick={()=>finalizeSale()}>Finalize sale</button>
                 { props.teams.map(t => <p key={t.id}>{t.owner} <button disabled={bidButtonDisabled(props.nominatedPlayer, t)!==true} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button></p>) }
                 </div>
             }

@@ -11,7 +11,7 @@ const AuctionView = (props) => {
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
     const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
     //const [bid, setBid] = useState(null)
-
+    
     useEffect( () => {
         setTimeout( () => {
             if (timeLeft>0){
@@ -21,7 +21,20 @@ const AuctionView = (props) => {
             }
         }, 1000)
     })   
-    //console.log(props)
+
+    //const [mockNappi, setMockNappi] = useState(true)
+    // if (endTime<Date.now()){
+    //     // props.lähetys()
+    //     setMockNappi(false)
+    //    setEndTime(Date.now()+30000)
+    // }
+    //<button disabled={mockNappi}>Mock</button>
+
+
+
+
+
+
     // const sold = () => {
     //     if (endTime<Date.now()){
     //         console.log("SOLD!")
