@@ -56,7 +56,7 @@ const SubApp = (props) => {
 
     return (
         <div className="App">
-          <SelfInfo manager={manager} start={start}/>
+          <SelfInfo manager={manager} start={start} nominatedPlayer={nominatedPlayer} turn={turn}/>
           <div className={styles.Flexi}>
             <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate}/>
             <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start}/>

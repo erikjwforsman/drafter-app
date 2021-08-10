@@ -50,7 +50,7 @@ const AuctionView = (props) => {
     //         console.log(Date.now())
     //     }
     // }
-    //console.log(props)
+    console.log(props)
     //console.log(props.playerToNominate)
     // const plusOne = () => {
     //     setPrice(price+1)
@@ -60,7 +60,8 @@ const AuctionView = (props) => {
     if (playerBeingSold===null){
         return(
             <div>
-                Waiting for {props.turn.owner}
+                <h2>0.09</h2>
+                <h2>{props.turn.owner} is nominating...</h2>
             </div>
         )
     }
@@ -68,8 +69,12 @@ const AuctionView = (props) => {
     //console.log(props)
     return (
         <div>
-                <h2>Countdown</h2>
-                <h3>Price: {playerBeingSold.currentPrice} Timeleft: {Math.trunc(timeLeft) >= 0 ? Math.trunc(timeLeft) : 0}</h3>
+                <h2>0:{Math.trunc(timeLeft)<10 ? "0":null}{Math.trunc(timeLeft) >= 0 ? Math.trunc(timeLeft) : 0}</h2>
+                <h2>Player: {playerBeingSold.player.playerName},  {playerBeingSold.player.nflTeam}</h2>
+                <h3>Position</h3>
+                <h3>Price: {playerBeingSold.currentPrice}</h3>
+                <h3>Avg price:</h3>
+                <h3>Bye Week:</h3>
                 {/* <button onClick={()=>plus10()}>+10sek</button> */}
                 {/* <button onClick={()=>plusOne()}>Bid +1</button> */}
         </div>

@@ -48,8 +48,26 @@
 .SmallScreen{
   flex-grow: 1;
   background-color: royalblue;
+  scroll-behavior: smooth;
 }
 .BigScreen{
   flex-grow: 2;
   background-color: salmon;
+  scroll-behavior: smooth;
+
+}
+
+/*Komponentit*/
+  /*SelfInfo*/
+.SelfInfoRed{
+  background-color: #F52528;
+  display: flex;
+}
+.SelfInfoOrange{
+  background-color: #F58925;
+  display: flex;
+}
+.SelfInfoGreen{
+  background-color: #74E036;
+  display: flex;
 }

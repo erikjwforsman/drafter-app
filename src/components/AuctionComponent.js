@@ -69,7 +69,6 @@ const AuctionComponent = (props) => {
     return(
         
         <div className={styles.BigScreen}>
-            <h2>Vuoro: </h2>
             <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={lähetys} xfinalizeSaleButton={xfinalizeSaleButton}/>
 
             <h2>Manager tools</h2>
