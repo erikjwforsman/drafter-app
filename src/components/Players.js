@@ -20,7 +20,7 @@ const Players = (props) => {
     
     // const playerList = data.allPlayers
     // // console.log(playerList)
-    // //console.log(props)
+    console.log(props)
     // //console.log(position)
     // const availablePlayers = playerList.filter(p => !props.soldPlayers.includes(p.id))
     // availablePlayers.sort( (p1, p2) => p1.rank - p2.rank)

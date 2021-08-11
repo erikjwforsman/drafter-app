@@ -12,6 +12,7 @@ const AuctionView = (props) => {
     }
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
     //Tähän joku ratkaisu, että
+    
     useEffect( () => {
         setTimeout( () => {
             if (timeLeft>0){
@@ -27,6 +28,10 @@ const AuctionView = (props) => {
             }
         }, 1000)
     })
+
+    if (props.turn===null){
+        return <div>Starting soon</div>
+    }
 
 
     const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
@@ -50,7 +55,7 @@ const AuctionView = (props) => {
     //         console.log(Date.now())
     //     }
     // }
-    console.log(props)
+    //console.log(props)
     //console.log(props.playerToNominate)
     // const plusOne = () => {
     //     setPrice(price+1)

@@ -4,7 +4,7 @@ import Players from "./Players"
 import AuctionComponent from "./AuctionComponent"
 import Teams from "./Teams";
 import {useMutation, useQuery} from "@apollo/client";
-import {CHANGE_PROPOSER, CHANGE_BID, GET_ALL, ADD_TEAM, SELL_PLAYER, ADD_PLAYER} from "../graphql/queries";
+import {CHANGE_PROPOSER, CHANGE_BID, GET_ALL, ADD_TEAM, SELL_PLAYER, ADD_PLAYER, NULL_PROPOSER} from "../graphql/queries";
 import {nominateButtonDisabled} from "../utils/teamUtils"
 import styles from "../AppStyles.module.css"
 //import { QueryManager } from "@apollo/client/core/QueryManager";
@@ -18,7 +18,7 @@ const SubApp = (props) => {
     //console.log(props.data)
     const [queue, setQueue] = useState([])
     const nominatedPlayer = props.data.currentBid
-    const turn = props.data.allTeams.find(t => t.place === props.data.lastProposer.proposer)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
+    const turn = props.data.lastProposer === null ? null : props.data.allTeams.find(t => t.place === props.data.lastProposer.proposer)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
@@ -31,8 +31,8 @@ const SubApp = (props) => {
           changeTurn()
         }        
       }         
-
     }
+    
     const validateManagerCanNominate = nominateButtonDisabled(nominatedPlayer, manager, turn)
 
     //Playersin funkitiot ja propsit

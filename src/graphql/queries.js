@@ -26,6 +26,7 @@ export const GET_PLAYERS = gql`
             expectedValue
             position
             bye
+            injury
             id
         }
     }
@@ -40,6 +41,7 @@ export const GET_ALL = gql`
             expectedValue
             position
             bye
+            injury
             id
         }
         allSoldPlayers{
@@ -103,6 +105,14 @@ export const CHANGE_PROPOSER = gql`
     mutation changeProposer{
         changeProposer{
             proposer
+        }
+    }
+`
+
+export const NULL_PROPOSER = gql`
+    mutation nullProposer{
+        nullProposer{
+            true
         }
     }
 `

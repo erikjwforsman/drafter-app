@@ -7,7 +7,7 @@ const AvailablePlayerRow = (props) => {
     return (
         <tr>
             <td>{props.player.rank}. </td>
-            <td>{props.player.playerName}</td>
+            <td>{props.player.playerName} {props.player.injury !== null ? props.player.injury : null}</td>
             <td>{props.player.position}</td>
             <td>{props.player.nflTeam}</td>
             <td>{props.player.bye}</td>

@@ -15,6 +15,20 @@ const SelfInfo = (props) => {
     const chosen = "styles.SelfInfoOrange"
     const lahto ="styles.Flexi"
 
+    if (props.turn === null) {
+        return(
+            <div className={styles.SelfInfoOrange}>
+                <button onClick={()=>props.start()}>start</button>
+                <h1>Managerin info: {props.manager.owner}</h1>
+                Auction starting soon...
+                <div>
+                <p>Money:{managerInfo.moneyLeft}  avg:{managerInfo.avgPrice} max:{managerInfo.maxBid} seats left:{managerInfo.seatsLeft}</p>
+                <p>QB: {info.qb} RB: {info.rb} WR: {info.wr} TE: {info.te} K: {info.k} D: {info.d} IDP: {info.idp}</p>
+            </div>
+            </div>
+        )
+    }
+
 
     return (
         <div className={props.manager.id===props.turn.id & props.nominatedPlayer===null ? styles.SelfInfoGreen : props.nominatedPlayer===null ? styles.SelfInfoOrange : props.nominatedPlayer.bidder === props.manager.id ? styles.SelfInfoGreen :  styles.SelfInfoRed}>
