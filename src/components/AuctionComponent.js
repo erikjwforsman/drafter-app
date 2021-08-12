@@ -13,7 +13,7 @@ const AuctionComponent = (props) => {
     const [sellPlayer] = useMutation(SELL_PLAYER)
     const [customBid, setCustomBid] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 2) 
     const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true)
-    console.log(props)
+    //console.log(props)
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
 
@@ -52,10 +52,6 @@ const AuctionComponent = (props) => {
         await props.start(true) //Turha await?
     }
 
-    const lähetys = (boolean) => {
-        console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
-        setxFinalizeSaleButton(boolean)
-    }
 
     //koodi auto nominationiin
     // const Startti = 
@@ -66,10 +62,49 @@ const AuctionComponent = (props) => {
 
     //Tee muualla hyväksyttävä disabled koodi finalizeSaleen
     //props.nominatedPlayer===null | Date.now()<props.nominatedPlayer.timeLeft 
+    console.log(props)
+    return(
+        <div className={props.turn === null ? styles.SelfInfoOrange : props.manager.id===props.turn.id & props.nominatedPlayer===null ? styles.SelfInfoGreen : props.nominatedPlayer===null ? styles.SelfInfoOrange : props.nominatedPlayer.bidder === props.manager.id ? styles.SelfInfoGreen :  styles.SelfInfoRed}>
+            {props.manager.owner==="Erik" &&
+            <button onClick={()=>props.start()}>start</button>
+            }
+            {/* Auction timer */}
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton} />
+            {/* Manager toolsit */}
+            <div>
+                <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
+                
+                <form onSubmit={submit}>
+                    <div>
+                        Custom bid <input
+                            value={customBid}
+                            onChange={ ({target}) => setCustomBid(target.value)}
+                        />
+                    </div>
+                    <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true } type="submit">bid</button>
+                </form>
+            </div>
+            {/* Player info */}
+            {props.nominatedPlayer !== null &&
+            <div>
+                <h2>Player: {props.nominatedPlayer.player.playerName},  {props.nominatedPlayer.player.nflTeam}</h2>
+                <h3>Avg price:</h3>
+                <h3>Bye Week:</h3>
+            </div>
+            }
+            {props.nominatedPlayer === null &&
+            <div>
+                <h2>Waiting for nomination</h2>
+            </div>
+            }
+            Uusi paikka Auctionille
+        </div>
+    )
+
     return(
         
         <div className={styles.BigScreen}>
-            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={lähetys} xfinalizeSaleButton={xfinalizeSaleButton}/>
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton}/>
 
             <h2>Manager tools</h2>
             <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
@@ -83,6 +118,8 @@ const AuctionComponent = (props) => {
                 <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true } type="submit">bid</button>
             </form>
             
+
+
             {props.manager.owner==="Erik" &&
                 <div>
                 <h2>Commish tool</h2>

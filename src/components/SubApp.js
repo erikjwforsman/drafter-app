@@ -17,11 +17,19 @@ const SubApp = (props) => {
 
     //console.log(props.data)
     const [queue, setQueue] = useState([])
+    console.log(queue)
     const nominatedPlayer = props.data.currentBid
     const turn = props.data.lastProposer === null ? null : props.data.allTeams.find(t => t.place === props.data.lastProposer.proposer)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
+    const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true) //Tarkistaa, voidaanko kauppa finalisoida
+
+    const lähetys = (boolean) => {
+      console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
+      setxFinalizeSaleButton(boolean)
+  }
+
     const start = async(value) =>{
       //value periytyy AuctionComponentin finalizeSalesta ja kiertää startin varmennuksen
       if (value===true){
@@ -41,8 +49,12 @@ const SubApp = (props) => {
     }
     const callBackNominate = (player) => {
         // Tähän ainoastaansuora nimeäminen, EI QUERYÄ!!!
-        const firstBid = {bidder: turn.id, playerId:player.id, price:1}
+        //Suora nimeäminen playerilla if
+        const firstBid = {bidder: turn.id, playerId:player.id, price:1} //Varmaan siirretään mutaation sisälle 
         changeBid({ variables: firstBid })
+        //Epäsuora nimeäminen pelaajajonosta kun aika loppuu passiivireaktiolla, ei playeria
+
+        //Epäsuora nimeäminen vapaista pelaajista ajan loputtua passiivireaktiolla, ei playeria 
     }
     //Vapaiden pelaajien erottelu
     const mapped = props.data.allSoldPlayers.map(p=>p.oldId)
@@ -56,10 +68,10 @@ const SubApp = (props) => {
 
     return (
         <div className="App">
-          <SelfInfo manager={manager} start={start} nominatedPlayer={nominatedPlayer} turn={turn}/>
+          <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys}/>
           <div className={styles.Flexi}>
             <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate}/>
-            <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start}/>
+            <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn}           manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>
             <Teams teams={props.data.allTeams} manager={manager}/>
           </div>
           
