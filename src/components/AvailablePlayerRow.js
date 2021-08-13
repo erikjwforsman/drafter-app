@@ -2,6 +2,7 @@ import React from "react"
 
 const AvailablePlayerRow = (props) => {
     // console.log(props)
+    //Alla oleva auki tuoteversioon
     // console.log(props.validateManagerCanNominate!==true)
 
     return (

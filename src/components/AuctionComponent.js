@@ -69,7 +69,7 @@ const AuctionComponent = (props) => {
             <button onClick={()=>props.start()}>start</button>
             }
             {/* Auction timer */}
-            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton} />
+            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton} nominatingTime={props.nominatingTime}/>
             {/* Manager toolsit */}
             <div>
                 <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>

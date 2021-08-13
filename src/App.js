@@ -7,7 +7,7 @@ const App = () => {
   const {data, error, loading} = useQuery(GET_ALL)//, {
    //   pollInterval: 1000
    //})
-  //console.log(data)
+  console.log(data)
   const [manager, setManager] = useState("Erik")
 
   if (loading ){

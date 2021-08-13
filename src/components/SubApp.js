@@ -13,21 +13,37 @@ const SubApp = (props) => {
 
   //HUOMHUOMHUOM
   //Varmista että backissä on yhtaikainen cross platform validointi fronttien samanaikaisten tarjousten hyväksynnälle!!!!
+  //Automaattinominate ei paikalla oleville??? // Jos yleiskoodilla, pitää huomioida paikallinen aikadilemma
   //HUOMHUOMHUOM PÄÄTTYY
 
     //console.log(props.data)
     const [queue, setQueue] = useState([])
-    console.log(queue)
+    //console.log(queue)
     const nominatedPlayer = props.data.currentBid
     const turn = props.data.lastProposer === null ? null : props.data.allTeams.find(t => t.place === props.data.lastProposer.proposer)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
+    const nominatingTime = props.data.lastProposer !== null ? props.data.lastProposer.timeLeft : 2519211811670
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
     const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true) //Tarkistaa, voidaanko kauppa finalisoida
-
+    console.log(typeof(nominatingTime))
     const lähetys = (boolean) => {
+      //If myydään pelaajaa
+      
+      if(boolean==="nominate" & manager.owner === turn.owner){
+        console.log("Tultiin ei booleanilla")
+        if (queue.length>0){
+          console.log(queue[0])
+          callBackNominate(queue[0])
+        } else {
+          console.log(availablePlayers[0])
+          callBackNominate(availablePlayers[0])
+        }
+      }
+      console.log(boolean)
       console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
       setxFinalizeSaleButton(boolean)
+      //If ollaan nimeämässä => automaatti nimeäminen
   }
 
     const start = async(value) =>{
@@ -68,7 +84,7 @@ const SubApp = (props) => {
 
     return (
         <div className="App">
-          <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys}/>
+          <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys} nominatingTime={nominatingTime}/>
           <div className={styles.Flexi}>
             <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate}/>
             <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn}           manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>

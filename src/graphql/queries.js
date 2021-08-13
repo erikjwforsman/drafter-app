@@ -68,6 +68,7 @@ export const GET_ALL = gql`
         }
         lastProposer{
             proposer
+            timeLeft
         }
         currentBid{
             bidder

@@ -6,7 +6,7 @@ const AuctionView = (props) => {
     //const[endTime, setEndTime] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000)//Noudetaan tarjouksesta
 
     //Tee backiin lisäys, jotta saadaan 8sek => 10sek
-    const endTime = props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000
+    const endTime = props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : props.nominatingTime
     const calculateTimeLeft = () => {
         return (endTime-Date.now())/1000
     }
@@ -21,10 +21,15 @@ const AuctionView = (props) => {
                     props.lähetys(true)
                 }
             } else {
-                setTimeLeft(calculateTimeLeft())
-                if(props.xfinalizeSaleButton===true){
-                    props.lähetys(false)
-                }       
+                if(props.nominatedPlayer===null){
+                    props.lähetys("nominate")
+                    console.log("Nyt ollaan alle nollassa")
+                } else {
+                    setTimeLeft(calculateTimeLeft())
+                    if(props.xfinalizeSaleButton===true){
+                        props.lähetys(false)
+                    } 
+                }                      
             }
         }, 1000)
     })
@@ -65,7 +70,7 @@ const AuctionView = (props) => {
     if (playerBeingSold===null){
         return(
             <div>
-                <h2>0.09</h2>
+                <h2>0:{Math.trunc(timeLeft)<10 ? "0":null}{Math.trunc(timeLeft) >= 0 ? Math.trunc(timeLeft) : 0}</h2>
                 {/* <h2>{props.turn.owner} is nominating...</h2> */}
             </div>
         )
