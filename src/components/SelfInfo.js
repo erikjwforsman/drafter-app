@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from "../AppStyles.module.css"
-import {rosterInfo, teamInfo, validateBid, bidButtonDisabled} from "../utils/teamUtils"
+import {rosterInfo, teamInfo, validateBid, bidButtonDisabled, nominateButtonDisabled} from "../utils/teamUtils"
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
 
@@ -47,7 +47,7 @@ const SelfInfo = (props) => {
         }
     }
     
-
+    console.log(props.player)
     return(<div className={styles.BigScreen}>
         <h1>Manager: {props.manager.owner}</h1>
         <p>Money:{managerInfo.moneyLeft}  Avg bid:{managerInfo.avgPrice} Max bid:{managerInfo.maxBid} Roster spots left:{managerInfo.seatsLeft}</p>
@@ -57,14 +57,24 @@ const SelfInfo = (props) => {
                 <div>
                     <h2>Commish tools</h2>
                     <button disabled={props.xfinalizeSaleButton} onClick={()=>finalizeSale()}>Finalize sale</button>
-                    { props.teams.map(t => <p key={t.id}>{t.owner} <button disabled={bidButtonDisabled(props.nominatedPlayer, t)!==true} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button></p>) }
+                    
+                        { props.teams.map(t => <p className={styles.Mini} key={t.id}>
+                            {t.owner} 
+                            <button disabled={bidButtonDisabled(props.nominatedPlayer, t)!==true} onClick={()=>bidPlusOne(t)}>${currentBidPlusOne}</button> 
+                            <button disabled={nominateButtonDisabled(props.nominatedPlayer, t, props.turn)!==true} onClick={ ()=> props.nominate(props.player)}>Nominate first</button>
+                        </p>) }                                                             
+                    
                     {/* { props.teams.map(t => <p key={t.id}>{t.owner} <button>$</button></p>) } */}
 
                 </div>
             }
         <div>
                 <h2>Jono</h2>
-                {filteredQueue.map(p => <p key={p.id}>{p.playerName} <button onClick={ () => props.callBackRemove(p.id)}>Remove</button></p>)}
+                {filteredQueue.map(p => <p className={styles.Mini} key={p.id}>
+                    {p.rank}. {p.playerName} {p.injury}
+                    <button onClick={ () => props.callBackRemove(p.id)}>Remove</button> 
+                    <button disabled={nominateButtonDisabled(props.nominatedPlayer, props.manager, props.turn)!==true} onClick={ ()=> props.nominate(props.player)}>Nominate</button>
+                </p>)}
             </div>
     </div>)
 

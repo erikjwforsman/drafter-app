@@ -1,12 +1,13 @@
 //import { stripIgnoredCharacters } from "graphql"
 import React, {useState, useEffect} from "react"
+import styles from "../AppStyles.module.css"
 
 const AuctionView = (props) => {
     //Vertaa endtime ja timeLeft erot
     //const[endTime, setEndTime] = useState(props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : Date.now()+30000)//Noudetaan tarjouksesta
 
     //Tee backiin lisäys, jotta saadaan 8sek => 10sek
-    const endTime = props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : props.nominatingTime
+    const endTime = props.nominatedPlayer !== null ? props.nominatedPlayer.timeLeft : 30000
     const calculateTimeLeft = () => {
         return (endTime-Date.now())/1000
     }
@@ -17,19 +18,14 @@ const AuctionView = (props) => {
         setTimeout( () => {
             if (timeLeft>0){
                 setTimeLeft(calculateTimeLeft())
-                if(props.xfinalizeSaleButton===false){
+                if(props.xfinalizeSaleButton===false ){
                     props.lähetys(true)
                 }
             } else {
-                if(props.nominatedPlayer===null){
-                    props.lähetys("nominate")
-                    console.log("Nyt ollaan alle nollassa")
-                } else {
-                    setTimeLeft(calculateTimeLeft())
-                    if(props.xfinalizeSaleButton===true){
-                        props.lähetys(false)
-                    } 
-                }                      
+                setTimeLeft(calculateTimeLeft())
+                if(props.xfinalizeSaleButton===true & props.nominatedPlayer!==null){
+                    props.lähetys(false)
+                }                          
             }
         }, 1000)
     })
@@ -70,15 +66,15 @@ const AuctionView = (props) => {
     if (playerBeingSold===null){
         return(
             <div>
-                <h2>0:{Math.trunc(timeLeft)<10 ? "0":null}{Math.trunc(timeLeft) >= 0 ? Math.trunc(timeLeft) : 0}</h2>
-                {/* <h2>{props.turn.owner} is nominating...</h2> */}
+                
+                <h1>{props.turn.owner} is nominating...</h1>
             </div>
         )
     }
 
     //console.log(props)
     return (
-        <div>
+        <div className={styles.Timer}>
                 <h2>0:{Math.trunc(timeLeft)<10 ? "0":null}{Math.trunc(timeLeft) >= 0 ? Math.trunc(timeLeft) : 0}</h2>
                 {/* <h2>Player: {playerBeingSold.player.playerName},  {playerBeingSold.player.nflTeam}</h2>
                 <h3>Position</h3>

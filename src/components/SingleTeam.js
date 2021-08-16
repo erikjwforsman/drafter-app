@@ -1,15 +1,11 @@
 import React from "react";
 import SingleSoldPlayer from "./SingleSoldPlayer";
 import {teamInfo} from "../utils/teamUtils"
+import styles from "../AppStyles.module.css"
 
 const SingleTeam = (props) => {
-     //console.log(props)
-    // console.log(props.team.players)
-
     //console.log(props)
-
     const info = teamInfo(props.team.players.length, props.team.salary)
-    //console.log(info)
 
     if (!props){
         return <div>Testi onnistui</div>
@@ -17,28 +13,28 @@ const SingleTeam = (props) => {
 
     return (
         <div>
-            <h3><strong>{props.team.owner}</strong></h3>
-            <h3>Roster size: {info.maxRosterSize-info.seatsLeft}/19</h3>
-            <h3>Money left: {info.moneyLeft}</h3>
-            <h3>Avg Price: {info.avgPrice}</h3>
-            <h3>Max Bid: {info.maxBid}</h3>
-
-
-            <h3>QB:</h3>
-            {props.team.players.filter(p => p.position==="QB").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>RB:</h3>
-            {props.team.players.filter(p => p.position==="RB").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>WR:</h3>
-            {props.team.players.filter(p => p.position==="WR").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>TE:</h3>
-            {props.team.players.filter(p => p.position==="TE").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>K:</h3>
-            {props.team.players.filter(p => p.position==="K").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>D:</h3>
-            {props.team.players.filter(p => p.position==="D").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-            <h3>IDP:</h3>
-            {props.team.players.filter(p => p.position==="IDP").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-        </div>
+            <h3 className={styles.MiniDown}>Owner: {props.team.owner}</h3>
+            <h4 className={styles.MiniUp}>Roster size: {info.maxRosterSize-info.seatsLeft}/19 Money left: {info.moneyLeft} <br></br>
+            Avg Price: {info.avgPrice} Max Bid: {info.maxBid}</h4>
+            <table>
+                <tbody>
+                    <tr><td>QB(min 1):</td></tr>
+                    {props.team.players.filter(p => p.position==="QB").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>RB(min 2):</td></tr>
+                    {props.team.players.filter(p => p.position==="RB").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>WR(min 2):</td></tr>
+                    {props.team.players.filter(p => p.position==="WR").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>TE(min 1):</td></tr>
+                    {props.team.players.filter(p => p.position==="TE").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>K(min 1):</td></tr>
+                    {props.team.players.filter(p => p.position==="K").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>D(min 1):</td></tr>
+                    {props.team.players.filter(p => p.position==="D").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
+                    <tr><td>IDP(min 1):</td></tr>
+                    {props.team.players.filter(p => p.position==="IDP").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}     
+                </tbody>
+            </table>       
+         </div>
     )
 }
 

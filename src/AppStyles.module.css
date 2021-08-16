@@ -42,19 +42,57 @@
 } */
 
 /*APP*/
+/* .App {
+  height: 100%;
+  width: 100%;
+
+} */
+
 .Flexi {
   display: flex;
+  
+}
+.FlexiContent{
+  display: flex;
+  width: 100%;
+}
+.Top{
+  position: fixed;
+  width: 100%;
+  margin: 0%;
 }
 .SmallScreen{
   flex-grow: 1;
-  background-color: royalblue;
+  background-color: maroon;
   scroll-behavior: smooth;
+  padding-top:15%;
 }
 .BigScreen{
   flex-grow: 2;
-  background-color: salmon;
+  background-color: goldenrod;
   scroll-behavior: smooth;
+  padding-top: 15%;
 
+}
+/* background-color: #C75050; */
+.Mini{
+  padding-top: 0%;
+  padding-bottom: 0%;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+.MiniDown{
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+}
+.MiniUp{
+  padding-top: 0%;
+  margin-top: 0%;
+}
+
+.NoMargin{
+  padding-top: 0%;
+  padding-bottom: 0%;
 }
 
 /*Komponentit*/
@@ -64,10 +102,25 @@
   display: flex;
 }
 .SelfInfoOrange{
-  background-color: #F58925;
+  background-color: yellow;
   display: flex;
 }
 .SelfInfoGreen{
   background-color: #74E036;
   display: flex;
+}
+
+.TimerSection{
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.Timer{
+  text-align: center;
+  border: black;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  margin-top: 0%;
+  margin-bottom: 0%;
 }

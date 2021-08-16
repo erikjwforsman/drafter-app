@@ -69,21 +69,35 @@ const AuctionComponent = (props) => {
             <button onClick={()=>props.start()}>start</button>
             }
             {/* Auction timer */}
-            <AuctionView playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton} nominatingTime={props.nominatingTime}/>
+
+            <div className={styles.TimerSection}>
+                <h3 className={styles.Mini}>Time left:</h3>
+                <AuctionView  playerQueue={filteredQueue} nominatedPlayer={props.nominatedPlayer} turn={props.turn} lähetys={props.lähetys} xfinalizeSaleButton={xfinalizeSaleButton} />
+                <h4 className={styles.Mini}>Nominated by</h4>
+                <h4 className={styles.MiniUp}>{props.turn.owner}</h4>
+            </div>
+            
+            {}
+
+
             {/* Manager toolsit */}
+            {props.nominatedPlayer !== null &&
             <div>
-                <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
+                Quick bid <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true} onClick={()=>bidPlusOne(props.manager)}>${currentBidPlusOne}</button>
                 
                 <form onSubmit={submit}>
                     <div>
-                        Custom bid <input
-                            value={customBid}
+                        Bid <input
+                            style={{width: "30px"}}
+                            
                             onChange={ ({target}) => setCustomBid(target.value)}
                         />
-                    </div>
+                    
                     <button disabled={bidButtonDisabled(props.nominatedPlayer, props.manager)!==true } type="submit">bid</button>
+                    </div>
                 </form>
             </div>
+            }
             {/* Player info */}
             {props.nominatedPlayer !== null &&
             <div>
@@ -92,12 +106,7 @@ const AuctionComponent = (props) => {
                 <h3>Bye Week:</h3>
             </div>
             }
-            {props.nominatedPlayer === null &&
-            <div>
-                <h2>Waiting for nomination</h2>
-            </div>
-            }
-            Uusi paikka Auctionille
+            
         </div>
     )
 

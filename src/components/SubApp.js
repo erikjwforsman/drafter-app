@@ -21,27 +21,28 @@ const SubApp = (props) => {
     //console.log(queue)
     const nominatedPlayer = props.data.currentBid
     const turn = props.data.lastProposer === null ? null : props.data.allTeams.find(t => t.place === props.data.lastProposer.proposer)                            //Noudetaan viimeinen myydyn pelaajan ehdottaja +1
-    const nominatingTime = props.data.lastProposer !== null ? props.data.lastProposer.timeLeft : 2519211811670
+    //const nominatingTime = props.data.lastProposer !== null ? props.data.lastProposer.timeLeft : 2519211811670
     const manager = props.data.allTeams.find(t => t.owner === props.manager) // Periytyy Appista? 
     const [changeTurn] = useMutation(CHANGE_PROPOSER)//
     const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
     const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true) //Tarkistaa, voidaanko kauppa finalisoida
-    console.log(typeof(nominatingTime))
+    //console.log(typeof(nominatingTime))
+
     const lähetys = (boolean) => {
       //If myydään pelaajaa
       
-      if(boolean==="nominate" & manager.owner === turn.owner){
-        console.log("Tultiin ei booleanilla")
-        if (queue.length>0){
-          console.log(queue[0])
-          callBackNominate(queue[0])
-        } else {
-          console.log(availablePlayers[0])
-          callBackNominate(availablePlayers[0])
-        }
-      }
-      console.log(boolean)
-      console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
+      // if(boolean==="nominate" & manager.owner === turn.owner){
+      //   console.log("Tultiin ei booleanilla")
+      //   if (queue.length>0){
+      //     console.log(queue[0])
+      //     callBackNominate(queue[0])
+      //   } else {
+      //     console.log(availablePlayers[0])
+      //     callBackNominate(availablePlayers[0])
+      //   }
+      // }
+      //console.log(boolean)
+      //console.log("Lähetetty takaisin päin. Nyt laitetaan sisään", boolean)
       setxFinalizeSaleButton(boolean)
       //If ollaan nimeämässä => automaatti nimeäminen
   }
@@ -58,6 +59,9 @@ const SubApp = (props) => {
     }
     
     const validateManagerCanNominate = nominateButtonDisabled(nominatedPlayer, manager, turn)
+    // console.log(nominatedPlayer)
+    // console.log(manager)
+    // console.log(turn)
 
     //Playersin funkitiot ja propsit
     const addPlayerToQueue = (player) => { 
@@ -66,7 +70,10 @@ const SubApp = (props) => {
     const callBackNominate = (player) => {
         // Tähän ainoastaansuora nimeäminen, EI QUERYÄ!!!
         //Suora nimeäminen playerilla if
+        // console.log(turn)
+        // console.log(player)
         const firstBid = {bidder: turn.id, playerId:player.id, price:1} //Varmaan siirretään mutaation sisälle 
+        console.log(firstBid)
         changeBid({ variables: firstBid })
         //Epäsuora nimeäminen pelaajajonosta kun aika loppuu passiivireaktiolla, ei playeria
 
@@ -84,10 +91,12 @@ const SubApp = (props) => {
 
     return (
         <div className="App">
-          <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys} nominatingTime={nominatingTime}/>
-          <div className={styles.Flexi}>
+          <div className={styles.Top}>
+          <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys} />
+          </div>
+          <div className={styles.FlexiContent}>
             <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate}/>
-            <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn}           manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>
+            <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn}          player={availablePlayers[0]} nominate={callBackNominate} manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>
             <Teams teams={props.data.allTeams} manager={manager}/>
           </div>
           

@@ -87,11 +87,15 @@ export const nominateButtonDisabled = (nominatedPlayer, manager, turn) => {
     //     return false
     // }
     if (nominatedPlayer===null | nominatedPlayer===undefined){
-        return true
+        if (turn===null){
+            return false
+        }
+
+        return manager.id===turn.id
     }
     
     //Tähän vielä vuorokohtainen nomineittaus
-    return manager.id===turn.id
+    return false
 }
 
 export const finalizeSaleButtonDisabled = (nominatedPlayer) => {
