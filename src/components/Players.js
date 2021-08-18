@@ -29,7 +29,8 @@ const Players = (props) => {
     // //console.log(availablePlayers[0])
 
     return(
-        <div className={styles.SmallScreen}>
+        <div className={styles.SmallScreenLeft}>
+            <div className={styles.PaddingLeft}>
             <>
                 <button onClick={ ()=>{setPosition("ALL")} }>ALL</button>
                 <button onClick={ ()=>{setPosition("QB")} }>QB</button>
@@ -42,20 +43,20 @@ const Players = (props) => {
                 <button onClick={ ()=>{setPosition("D")} }>D</button>
                 <button onClick={ ()=>{setPosition("IDP")} }>IDP</button>
             </p>
-            <p>Filter <input onChange={handleFilterChange} /></p>
-            <h2>Available players:</h2>
-            
+            <p className={styles.GoldText}>Filter <input onChange={handleFilterChange} /></p>
+            <h2 className={styles.GoldText}>Available players:</h2>
+            </div>
             {/* {availablePlayers.map(p => <p key={p.id}>{p.playerName}</p>)} */}
-            <table>
-                <thead>
+            <table >
+                <thead >
                     <tr>
-                        <th scope="col">Rank</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Pos</th>
-                        <th scope="col">Team</th>
-                        <th scope="col">Bye</th>
-                        <th scope="col">Avg</th>
-                        <th scope="col">Queue</th>
+                        <th className={styles.GoldText} scope="col">Rank</th>
+                        <th className={styles.GoldText} scope="col">Name</th>
+                        <th className={styles.GoldText} scope="col">Pos</th>
+                        <th className={styles.GoldText} scope="col">Team</th>
+                        <th className={styles.GoldText} scope="col">Bye</th>
+                        <th className={styles.GoldText} scope="col">Avg</th>
+                        <th className={styles.GoldText} scope="col">Queue</th>
                     </tr>
                 </thead>
                 <FilteredPlayers availablePlayers={props.availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate}/>

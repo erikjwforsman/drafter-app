@@ -12,7 +12,7 @@ const SingleTeam = (props) => {
     }
 
     return (
-        <div>
+        <div className={styles.TeamInfoStyle}>
             <h3 className={styles.MiniDown}>Owner: {props.team.owner}</h3>
             <h4 className={styles.MiniUp}>Roster size: {info.maxRosterSize-info.seatsLeft}/19 Money left: {info.moneyLeft} <br></br>
             Avg Price: {info.avgPrice} Max Bid: {info.maxBid}</h4>

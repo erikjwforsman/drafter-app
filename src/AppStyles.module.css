@@ -60,15 +60,27 @@
   position: fixed;
   width: 100%;
   margin: 0%;
+  
+}
+.SmallScreenLeft{
+  /* flex-grow: 1; */
+  width: 35%;
+  background-color: maroon;
+  scroll-behavior: smooth;
+  padding-top:15%;
 }
 .SmallScreen{
-  flex-grow: 1;
+  width: 30%;
+
+  /* flex-grow: 1; */
   background-color: maroon;
   scroll-behavior: smooth;
   padding-top:15%;
 }
 .BigScreen{
-  flex-grow: 2;
+  width: 35%;
+
+  /* flex-grow: 2; */
   background-color: goldenrod;
   scroll-behavior: smooth;
   padding-top: 15%;
@@ -102,12 +114,14 @@
   display: flex;
 }
 .SelfInfoOrange{
-  background-color: yellow;
+  background-color: gold;
   display: flex;
+  height: 100%;
 }
 .SelfInfoGreen{
   background-color: #74E036;
   display: flex;
+
 }
 
 .TimerSection{
@@ -123,4 +137,66 @@
   padding-bottom: 0%;
   margin-top: 0%;
   margin-bottom: 0%;
+}
+
+.TimerWithMargins{
+  text-align: center;
+  border: black;
+  border-radius: 10px;
+  background-color: whitesmoke;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+}
+.LittlePadding{
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
+.BackGroundGold{
+  background-color: goldenrod;
+
+  
+}
+.NoBorder{
+  border:0;
+}
+
+.TablePlayers{
+  background-color: maroon;
+}
+.TablePlayers_td{
+  text-align: center;
+  background-color: goldenrod;
+}
+
+.TeamInfoStyle{
+  background-color: maroon;
+  border-radius: 5%;
+  color:gold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  margin: 2%;
+  border: solid 5px goldenrod;
+  padding-left: 1%;
+  padding-bottom: 1%;
+}
+.TeamInfoStyle .Player{
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
+  background-color: goldenrod;
+  text-shadow: none;
+
+}
+.Button25{
+  width: 25%;
+}
+.GoldText{
+  color:gold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.PaddingLeft{
+  align-content: center;
+  padding-left: 1%;
 }

@@ -66,7 +66,6 @@ const AuctionView = (props) => {
     if (playerBeingSold===null){
         return(
             <div>
-                
                 <h1>{props.turn.owner} is nominating...</h1>
             </div>
         )
