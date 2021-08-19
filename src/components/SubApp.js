@@ -28,6 +28,8 @@ const SubApp = (props) => {
     const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true) //Tarkistaa, voidaanko kauppa finalisoida
     //console.log(typeof(nominatingTime))
 
+    
+
     const lähetys = (boolean) => {
       //If myydään pelaajaa
       
@@ -89,9 +91,19 @@ const SubApp = (props) => {
         setQueue(backer)
       }
 
+      const h = window.innerHeight;
+
+      const divTop = {
+          height: h*0.2,        
+          width:"100%",
+          overflowY: "scroll",
+          position:"fixed"
+      }
+    
+
     return (
         <div className="App">
-          <div className={styles.Top}>
+          <div style={divTop}>
           <AuctionComponent nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys} />
           </div>
           <div className={styles.FlexiContent}>

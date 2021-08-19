@@ -28,9 +28,24 @@ const Players = (props) => {
     // props.nominate(availablePlayers[0])
     // //console.log(availablePlayers[0])
 
+    const h = window.innerHeight;
+    // console.log(h)
+
+    const divLeft = {
+        height: h*0.75,        
+        width:"35%",
+        overflowY: "scroll",
+        backgroundColor: "maroon",
+        paddingTop: h*0.20+1,
+        paddingBottom: "1%"
+
+    }
+
     return(
-        <div className={styles.SmallScreenLeft}>
+        <div style={divLeft}>
+            <div className={styles.scroll}>
             <div className={styles.PaddingLeft}>
+            
             <>
                 <button onClick={ ()=>{setPosition("ALL")} }>ALL</button>
                 <button onClick={ ()=>{setPosition("QB")} }>QB</button>
@@ -62,6 +77,7 @@ const Players = (props) => {
                 <FilteredPlayers availablePlayers={props.availablePlayers} position={position} filter={filter} addPlayer={props.addPlayer} nominate={props.nominate} validateManagerCanNominate={props.validateManagerCanNominate}/>
 
             </table>
+            </div>
         </div>
     )
 }

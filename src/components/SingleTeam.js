@@ -30,7 +30,7 @@ const SingleTeam = (props) => {
                     {props.team.players.filter(p => p.position==="K").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
                     <tr><td>D(min 1):</td></tr>
                     {props.team.players.filter(p => p.position==="D").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}
-                    <tr><td>IDP(min 1):</td></tr>
+                    <tr><td>IDP(min 4):</td></tr>
                     {props.team.players.filter(p => p.position==="IDP").map(p => <SingleSoldPlayer player={p} key={p.id}/>)}     
                 </tbody>
             </table>       

@@ -33,7 +33,7 @@ const AuctionComponent = (props) => {
             console.log("Virheilmoitus")   //Aktivoi virhe-ilmoitus tässä
         }        
     }
-
+    console.log(props)
     const finalizeSale = async()=> {
         const soldPlayer = {
             owner:props.nominatedPlayer.bidder, 
@@ -95,9 +95,10 @@ const AuctionComponent = (props) => {
             {/* Player info */}
             {props.nominatedPlayer !== null &&
             <div className={styles.TimerSection}>
-                <h2>Player: {props.nominatedPlayer.player.playerName},  {props.nominatedPlayer.player.nflTeam}</h2>
-                <h3>Avg price:</h3>
-                <h3>Bye Week:</h3>
+                <h2 className={styles.MiniDown}>Player: {props.nominatedPlayer.player.playerName},  {props.nominatedPlayer.player.nflTeam} {props.nominatedPlayer.player.injury}</h2>
+                <h4 className={styles.NoMarginOrPadding}>Position: {props.nominatedPlayer.player.position}</h4>
+                <h4 className={styles.NoMarginOrPadding}>Avg price: {props.nominatedPlayer.player.expectedValue}</h4>
+                <h4 className={styles.NoMarginOrPadding}>Bye Week: {props.nominatedPlayer.player.bye}</h4>
                 
                 
             </div>

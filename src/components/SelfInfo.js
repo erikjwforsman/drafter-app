@@ -46,9 +46,20 @@ const SelfInfo = (props) => {
             console.log("Virheilmoitus") //Aktivoi virhe-ilmoitus tässä
         }
     }
-    
+    const h = window.innerHeight;
+
+    const divMiddle = {
+        height: h*0.75,        
+        width:"35%",
+        overflowY: "scroll",
+        backgroundColor: "goldenrod",
+        paddingTop: h*0.2,
+        paddingBottom: "1%"
+
+    }
+
     console.log(props.player)
-    return(<div className={styles.BigScreen}>
+    return(<div style={divMiddle}>
         <h1>Manager: {props.manager.owner}</h1>
         <p>Money:{managerInfo.moneyLeft}  Avg bid:{managerInfo.avgPrice} Max bid:{managerInfo.maxBid} Roster spots left:{managerInfo.seatsLeft}</p>
         <p>QB: {info.qb} RB: {info.rb} WR: {info.wr} TE: {info.te} K: {info.k} D: {info.d} IDP: {info.idp}</p>
@@ -69,8 +80,8 @@ const SelfInfo = (props) => {
                 </div>
             }
         <div>
-                <h2>Jono</h2>
-                {filteredQueue.map(p => <p className={styles.Mini} key={p.id}>
+                <h2>Queue</h2>
+                {filteredQueue.map(p => <p className={styles.MiniQueue} key={p.id}>
                     {p.rank}. {p.playerName} {p.injury}
                     <button onClick={ () => props.callBackRemove(p.id)}>Remove</button> 
                     <button disabled={nominateButtonDisabled(props.nominatedPlayer, props.manager, props.turn)!==true} onClick={ ()=> props.nominate(props.player)}>Nominate</button>

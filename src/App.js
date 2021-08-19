@@ -8,7 +8,7 @@ const App = () => {
   //    pollInterval: 1000
   //  })
   console.log(data)
-  const [manager, setManager] = useState("Erik")
+  const [manager, setManager] = useState("Kape")
 
   if (loading ){
     return <div>loading...</div>

@@ -10,9 +10,21 @@ const Teams = (props) => {
     //Tsekkaa järkevämpi kuin nykyinen null-ratkaisu
     //Esim. ota suoraan managerista?
     //Tuleeko nullia edes enää???
+    const h = window.innerHeight;
+    // console.log(h)
+
+    const divRight = {
+        height: h*0.75,        
+        width:"30%",
+        overflowY: "scroll",
+        backgroundColor: "maroon",
+        paddingTop: h*0.20+1,
+        paddingBottom: "1%"
+    }
+
     if (team===null){
         return (
-            <div className={styles.SmallScreen}>
+            <div style={divRight}>
                 {/* {props.teams.map(t => <button key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)} */}
                 {props.teams.slice(0, 4).map(t => <button key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}
                 {/* <h2>Teams:</h2>
@@ -24,7 +36,7 @@ const Teams = (props) => {
     }
 
     return (
-        <div className={styles.SmallScreen}>
+        <div style={divRight}>
             {/* {props.teams.map(t => <button key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)} */}
             {props.teams.slice(0, 4).map(t => <button className={styles.Button25} key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)} <br></br>
             {props.teams.slice(4, 8).map(t => <button className={styles.Button25} key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)}<br></br>
