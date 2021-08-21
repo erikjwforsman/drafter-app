@@ -1,7 +1,6 @@
 import React from "react"
 import styles from "../AppStyles.module.css"
 
-// className={styles.NoBorder}
 const AvailablePlayerRow = (props) => {
     return (
         <tr className={styles.TablePlayers}>

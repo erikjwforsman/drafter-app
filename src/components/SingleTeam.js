@@ -4,9 +4,9 @@ import {teamInfo} from "../utils/teamUtils"
 import styles from "../AppStyles.module.css"
 
 const SingleTeam = (props) => {
-    //console.log(props)
     const info = teamInfo(props.team.players.length, props.team.salary)
 
+    //Kaiketi turha? Lopuksi poistoon
     if (!props){
         return <div>Testi onnistui</div>
     }
@@ -40,4 +40,3 @@ const SingleTeam = (props) => {
 
 export default SingleTeam;
 
-//{props.team.players.map(p => <SingleSoldPlayer />)}
