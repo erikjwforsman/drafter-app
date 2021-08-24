@@ -1,25 +1,46 @@
-import React, {useState} from "react"
-import {useQuery} from "@apollo/client";
-import {GET_ALL} from "./graphql/queries";
-import SubApp from "./components/SubApp";
+import React, {useEffect, useState} from "react"
+import {useApolloClient} from "@apollo/client";
+// import {GET_ALL} from "./graphql/queries";
+// import SubApp from "./components/SubApp";
+import SignedIn from "./components/SignedIn";
+import LoginForm from "./components/LoginForm"
 
 const App = () => {
-  const {data, error, loading} = useQuery(GET_ALL)//, {
-  //    pollInterval: 1000
-  //  })
-  console.log(data)
-  const [manager, setManager] = useState("Erik")
+  const [token, setToken] = useState(null)
+  const [manager, setOwner] = useState(null)
+  const client = useApolloClient()
 
-  if (loading ){
-    return <div>loading...</div>
-  }  
-  if (error){
-    console.log(error)
+  useEffect( () => {
+    const token = localStorage.getItem("manager-token")
+    const ownerH = localStorage.getItem("owner")
+
+    if(token) {
+      setToken(token)
+    }
+
+    if(ownerH) {
+      setOwner(ownerH)
+    }
+  }, [])
+  
+
+  if (!token | !manager) {
+    return (<LoginForm setToken={setToken} setOwner={setOwner}/>)
+  }
+  
+
+  const logOut = () => {
+    setToken(null)
+    setOwner(null)
+    localStorage.clear()
+    client.resetStore()
+  }
+  const backLogOut = () => {
+    logOut()
   }
 
   //console.log(data)
-  // return(<div>WIP</div>)
-  return(<SubApp data={data} manager={manager}/>)
+  return(<SignedIn manager={manager} logOut={backLogOut} />)
 }
 
 export default App;

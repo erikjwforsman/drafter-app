@@ -1,5 +1,13 @@
 import {gql} from "@apollo/client"
 
+export const LOGIN = gql`
+    mutation login($owner: String, $password: String) {
+        login(owner: $owner, password:$password) {
+            value
+        }
+    }
+`
+
 export const GET_TEAMS = gql`
     query{
         allTeams{

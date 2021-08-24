@@ -48,12 +48,14 @@ const AuctionComponent = (props) => {
         props.start(true)
     }
 
+
+
     return(
         <div className={props.turn === null ? styles.SelfInfoOrange : props.manager.id===props.turn.id & props.nominatedPlayer===null ? styles.SelfInfoGreen : props.nominatedPlayer===null ? styles.SelfInfoOrange : props.nominatedPlayer.bidder === props.manager.id ? styles.SelfInfoGreen :  styles.SelfInfoRed}>
             {props.manager.owner==="Erik" &&
             <button onClick={()=>props.start()}>start</button>
             }
-            
+            <button onClick={() => props.logOut() }>Sign out</button>
             {/* Auction timer */}
             <div className={styles.TimerSection}>
                 {props.nominatedPlayer !== null && 
