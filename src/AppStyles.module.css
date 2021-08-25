@@ -237,3 +237,10 @@
   margin-top: 0%;
   margin-bottom: 0%;
 }
+.Injured{
+  background-color: white;
+  border: solid red 1px;
+  color:red;
+  padding-left: 5px;
+  padding-right: 5px;
+}

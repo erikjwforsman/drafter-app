@@ -6,8 +6,8 @@ import SubApp from "./SubApp";
 const SignedIn = (props) => {
     //return(<div>WIP</div>)
   const {data, error, loading} = useQuery(GET_ALL)//, {
-  //    pollInterval: 1000
-  //  })
+//      pollInterval: 1000
+//    })
   console.log(data)
   
 

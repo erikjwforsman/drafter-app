@@ -73,7 +73,7 @@ const SelfInfo = (props) => {
                     <p className={styles.MiniQueue} key={p.id}>
                         {p.rank}. {p.playerName} {p.injury}
                         <button onClick={ () => props.callBackRemove(p.id)}>Remove</button> 
-                        <button disabled={nominateButtonDisabled(props.nominatedPlayer, props.manager, props.turn)!==true} onClick={ ()=> props.nominate(props.player)}>Nominate</button>
+                        <button disabled={nominateButtonDisabled(props.nominatedPlayer, props.manager, props.turn)!==true} onClick={ ()=> props.nominate(p)}>Nominate</button>
                     </p>
                 )}
              </div>

@@ -14,7 +14,7 @@ const AuctionComponent = (props) => {
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
     const highestBidder = props.nominatedPlayer !== null ? props.teams.find(t => t.id === props.nominatedPlayer.bidder) : null
-    
+    console.log(props)
     const bidPlusOne = async(team) => {
         const newestBid= {bidder:team.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(currentBidPlusOne) }
         const curManager = props.teams.find(t => t.id === team.id)
@@ -97,8 +97,8 @@ const AuctionComponent = (props) => {
             {/* Player info */}
             {props.nominatedPlayer !== null &&
             <div className={styles.TimerSection}>
-                <h2 className={styles.MiniDown}>Player: {props.nominatedPlayer.player.playerName},  {props.nominatedPlayer.player.nflTeam} {props.nominatedPlayer.player.injury}</h2>
-                <h4 className={styles.NoMarginOrPadding}>Position: {props.nominatedPlayer.player.position}</h4>
+                <h2 className={styles.MiniDown}>Player: {props.nominatedPlayer.player.playerName} ,  {props.nominatedPlayer.player.nflTeam}</h2>
+                <h4 className={styles.NoMarginOrPadding}>Position: {props.nominatedPlayer.player.position} Injury: {props.nominatedPlayer.player.injury !== null ? <strong className={styles.Injured}>{props.nominatedPlayer.player.injury}</strong> : "none"}</h4>
                 <h4 className={styles.NoMarginOrPadding}>Avg price: {props.nominatedPlayer.player.expectedValue}</h4>
                 <h4 className={styles.NoMarginOrPadding}>Bye Week: {props.nominatedPlayer.player.bye}</h4>
                 

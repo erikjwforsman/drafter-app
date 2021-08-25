@@ -89,6 +89,7 @@ export const GET_ALL = gql`
                 position
                 bye
                 id
+                injury
             }
         }
 

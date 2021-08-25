@@ -2,6 +2,8 @@ import React from "react"
 import styles from "../AppStyles.module.css"
 
 const AvailablePlayerRow = (props) => {
+    
+
     return (
         <tr className={styles.TablePlayers}>
             <td className={styles.TablePlayers_td}>{props.player.rank}. </td>
