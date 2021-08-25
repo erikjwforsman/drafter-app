@@ -14,7 +14,7 @@ const AuctionComponent = (props) => {
     const managerRestrictions = teamInfo(props.manager.players.length, props.manager.salary)
     const currentBidPlusOne = props.nominatedPlayer !== null ? props.nominatedPlayer.currentPrice+1 : 1
     const highestBidder = props.nominatedPlayer !== null ? props.teams.find(t => t.id === props.nominatedPlayer.bidder) : null
-    console.log(props)
+
     const bidPlusOne = async(team) => {
         const newestBid= {bidder:team.id, playerId:props.nominatedPlayer.player.id, currentPrice:Number(currentBidPlusOne) }
         const curManager = props.teams.find(t => t.id === team.id)
@@ -56,6 +56,7 @@ const AuctionComponent = (props) => {
             <button onClick={()=>props.start()}>start</button>
             }
             <button onClick={() => props.logOut() }>Sign out</button>
+            {/* <button onClick={() => props.changeView()}>Change view</button> */}
             {/* Auction timer */}
             <div className={styles.TimerSection}>
                 {props.nominatedPlayer !== null && 

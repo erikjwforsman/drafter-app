@@ -8,7 +8,7 @@ const SignedIn = (props) => {
   const {data, error, loading} = useQuery(GET_ALL)//, {
 //      pollInterval: 1000
 //    })
-  console.log(data)
+//   console.log(data)
   
 
   if (loading ){

@@ -8,11 +8,15 @@ import LoginForm from "./components/LoginForm"
 const App = () => {
   const [token, setToken] = useState(null)
   const [manager, setOwner] = useState(null)
+  const [mobileView, setMobileView] = useState(false)
+  console.log(mobileView)
   const client = useApolloClient()
+  
 
   useEffect( () => {
     const token = localStorage.getItem("manager-token")
     const ownerH = localStorage.getItem("owner")
+    const mobileOn = localStorage.getItem("mobile")
 
     if(token) {
       setToken(token)
@@ -21,13 +25,18 @@ const App = () => {
     if(ownerH) {
       setOwner(ownerH)
     }
+
+    if(mobileOn) {
+      console.log(mobileOn)
+    }
   }, [])
   
 
   if (!token | !manager) {
-    return (<LoginForm setToken={setToken} setOwner={setOwner}/>)
+    return (<LoginForm setToken={setToken} setOwner={setOwner} setMobileView={setMobileView}/>)
   }
   
+  console.log(mobileView)
 
   const logOut = () => {
     setToken(null)

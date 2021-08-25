@@ -5,26 +5,28 @@ import {LOGIN} from "../graphql/queries"
 const LoginForm = (props) => {
     const [owner, setOwner] = useState("")
     const [password, setPassword] = useState("")
+    // const mobile = true
     const [login, result] = useMutation(LOGIN)
+    const [checked, setChecked] = useState(false)
 
     useEffect( () => {
         if(result.data){
-            console.log(result)
             const token = result.data.login.value
-            console.log(token)
-            // const owner = owner
-            console.log(owner)
+ 
             props.setToken(token)
             props.setOwner(owner)
+            props.setMobileView(checked)
+            
             localStorage.setItem("manager-token", token)
             localStorage.setItem("owner", owner)
+            localStorage.setItem("mobile", checked)   
         }
     }, [result.data])// eslint-disable-line
 
+    const handleClick = () => setChecked(!checked)
+
     const submit = async(event) => {
         event.preventDefault()
-        console.log(owner)
-        console.log(password)
         login({ variables: { owner, password } })
     }
 
@@ -43,6 +45,10 @@ const LoginForm = (props) => {
                         value={password}
                         onChange= { ({target}) => setPassword(target.value)}
                         />
+                </div>
+                <div>
+                    mobile <input 
+                        type="checkbox" onClick={handleClick} />
                 </div>
                 <button type="submit">
                     login
