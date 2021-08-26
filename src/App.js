@@ -49,7 +49,7 @@ const App = () => {
   }
 
   //console.log(data)
-  return(<SignedIn manager={manager} logOut={backLogOut} />)
+  return(<SignedIn manager={manager} logOut={backLogOut} mobileView={mobileView} />)
 }
 
 export default App;

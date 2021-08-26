@@ -5,9 +5,9 @@ import SubApp from "./SubApp";
 
 const SignedIn = (props) => {
     //return(<div>WIP</div>)
-  const {data, error, loading} = useQuery(GET_ALL)//, {
-//      pollInterval: 1000
-//    })
+  const {data, error, loading} = useQuery(GET_ALL, {
+     pollInterval: 1000
+   })
 //   console.log(data)
   
 
@@ -20,7 +20,7 @@ const SignedIn = (props) => {
 
   //console.log(data)
   // return(<div>WIP</div>)
-  return(<SubApp data={data} manager={props.manager} logOut={props.logOut} />)
+  return(<SubApp data={data} manager={props.manager} logOut={props.logOut} mobileView={props.mobileView}/>)
 }
 
 export default SignedIn

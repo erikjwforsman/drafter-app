@@ -23,9 +23,18 @@ const Players = (props) => {
         paddingTop: h*0.20+1,
         paddingBottom: "1%"
     }
+    const mobileDivLeft = {
+        height: h*0.75,        
+        width:"100%",
+        overflowY: "scroll",
+        backgroundColor: "maroon",
+        paddingTop: 1,
+        paddingBottom: "1%",
+        marginLeft:"10%"
+    }
 
     return(
-        <div style={divLeft}>
+        <div style={props.mobile===true ? mobileDivLeft : divLeft}>
             <div className={styles.scroll}>
             <div className={styles.PaddingLeft}>
             <>

@@ -47,8 +47,19 @@ const SelfInfo = (props) => {
         paddingBottom: "1%"
     }
 
+    const mobileDivMiddle = {
+        height: h*0.75,        
+        width:"100%",
+        overflowY: "scroll",
+        backgroundColor: "goldenrod",
+        paddingTop: 1,
+        paddingBottom: "1%",
+        border: "maroon solid 5px",
+        paddingLeft:"10%"
+    }
+
     return(
-        <div style={divMiddle}>
+        <div style={props.mobile===true ? mobileDivMiddle : divMiddle}>
             <h1>Manager: {props.manager.owner}</h1>
             <p>Money:{managerInfo.moneyLeft}  Avg bid:{managerInfo.avgPrice} Max bid:{managerInfo.maxBid} Roster spots left:{managerInfo.seatsLeft}</p>
             <p>QB: {info.qb} RB: {info.rb} WR: {info.wr} TE: {info.te} K: {info.k} D: {info.d} IDP: {info.idp}</p>
@@ -57,7 +68,7 @@ const SelfInfo = (props) => {
                 <div>
                     <h2>Commish tools</h2>
                     <button disabled={props.xfinalizeSaleButton} onClick={()=>finalizeSale()}>Finalize sale</button>
-                        
+                    <h2>Manager control</h2>
                     { props.teams.map(t => 
                         <p className={styles.Mini} key={t.id}>
                             {t.owner} 

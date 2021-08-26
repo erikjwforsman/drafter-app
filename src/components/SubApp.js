@@ -7,6 +7,7 @@ import {useMutation, useQuery} from "@apollo/client";
 import {CHANGE_PROPOSER, CHANGE_BID, GET_ALL, ADD_TEAM, SELL_PLAYER, ADD_PLAYER, NULL_PROPOSER} from "../graphql/queries";
 import {nominateButtonDisabled} from "../utils/teamUtils"
 import styles from "../AppStyles.module.css"
+import MobileView from "./MobileView"
 
 const SubApp = (props) => {
 
@@ -18,19 +19,11 @@ const SubApp = (props) => {
   const [changeTurn] = useMutation(CHANGE_PROPOSER)//
   const [changeBid] = useMutation(CHANGE_BID)//Muokkaa null-ehto
   const [xfinalizeSaleButton, setxFinalizeSaleButton] = useState(true) //Tarkistaa, voidaanko kauppa finalisoida
-  // const [mobileView, setMobileView] = useState(false)
+  console.log(props.mobileView)
  
   const lähetys = (boolean) => {
     setxFinalizeSaleButton(boolean)
   }
-
-  // const changeView = () => {
-  //   if(mobileView){
-  //     setMobileView(false)
-  //   } else{
-  //     setMobileView(true)
-  //   }
-  // }
 
   const start = async(value) =>{
     //value periytyy AuctionComponentin finalizeSalesta ja kiertää startin varmennuksen
@@ -73,6 +66,17 @@ const SubApp = (props) => {
       position:"fixed"
   }
     
+  //Tee kunnon mobileView-komponentti
+
+  if(props.mobileView){
+    return(<MobileView 
+      logOut={props.logOut} nominatedPlayer={nominatedPlayer} playerQueue={queue} autoPick={availablePlayers[0]} 
+      turn={turn} callBackRemove={callBackRemove} teams={props.data.allTeams} manager={manager} start={start} lähetys={lähetys} 
+      availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate} 
+      player={availablePlayers[0]} xfinalizeSaleButton={xfinalizeSaleButton}
+    />)
+  }
+
   // if(mobileView){
   //   const container ={
   //     width: "100%",
@@ -127,6 +131,8 @@ const SubApp = (props) => {
   //   );
   // }
 
+  
+
   return (
     <div className="App">
       <div style={divTop}>
@@ -134,7 +140,7 @@ const SubApp = (props) => {
       </div>
       <div className={styles.FlexiContent}>
         <Players availablePlayers={availablePlayers} addPlayer={addPlayerToQueue} nominate={callBackNominate} validateManagerCanNominate={validateManagerCanNominate}/>
-        <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn}          player={availablePlayers[0]} nominate={callBackNominate} manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>
+        <SelfInfo start={start} nominatedPlayer={nominatedPlayer} turn={turn} player={availablePlayers[0]} nominate={callBackNominate} manager={manager} playerQueue={queue} callBackRemove={callBackRemove} xfinalizeSaleButton={xfinalizeSaleButton} teams={props.data.allTeams}/>
         <Teams teams={props.data.allTeams} manager={manager}/>
       </div>          
     </div>
