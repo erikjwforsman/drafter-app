@@ -56,7 +56,6 @@ const AuctionComponent = (props) => {
             <button onClick={()=>props.start()}>start</button>
             }
             <button onClick={() => props.logOut() }>Sign out</button>
-            {/* <button onClick={() => props.changeView()}>Change view</button> */}
             {/* Auction timer */}
             <div className={styles.TimerSection}>
                 {props.nominatedPlayer !== null && 

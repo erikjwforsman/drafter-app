@@ -24,19 +24,6 @@ const Teams = (props) => {
         paddingBottom: "1%"
     }
 
-    //Tsekkaa järkevämpi kuin nykyinen null-ratkaisu
-    //Esim. ota suoraan managerista?
-    //Tuleeko nullia edes enää???
-    //Poistetaan ihan lopuksi
-    // if (team===null){
-    //     return (
-    //         <div style={divRight}>
-    //             {props.teams.slice(0, 4).map(t => <button key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)} 
-    //             <SingleTeam team={props.teams[0]} /> 
-    //         </div>
-    //     )
-    // }
-
     return (
         <div style={props.mobile===true ? mobileDivRight : divRight}>
             {props.teams.slice(0, 4).map(t => <button className={styles.Button25} key={t.id} onClick={ ()=>{setTeam(t)} }>{t.owner} {t.players.length}/19</button>)} <br></br>

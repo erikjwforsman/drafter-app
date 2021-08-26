@@ -10,7 +10,7 @@ const MobileView = (props) => {
     const changeView = (view) => {
         setView(view)
     }
-    console.log(props)
+    // console.log(props)
 
     const h = window.innerHeight;
     const container ={
@@ -64,16 +64,8 @@ const MobileView = (props) => {
       overflowY: "scroll",
       position: "absolute",
       marginTop:h*0.25,
-      // top: 0,
-      // left: 0,
-
-  //     width: 100%;
-  // height: 500px;
-  // overflow-y: scroll;
     }
     
-    
-
     return (
       <div style={container}>
         <div style={mobileTop}>

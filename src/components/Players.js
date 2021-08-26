@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import {useQuery} from "@apollo/client";
-import {GET_PLAYERS} from "../graphql/queries";
 import styles from "../AppStyles.module.css"
 import FilteredPlayers from "./FilteredPlayers";
 

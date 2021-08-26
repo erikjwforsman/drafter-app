@@ -27,8 +27,8 @@ const AuctionView = (props) => {
         return <div><h1>Starting soon</h1></div>
     }
 
-    const playerBeingSold = props.nominatedPlayer //props.currentBid!==null ? props.currentBid.currentPrice : 1)
-    if (playerBeingSold===null){
+    //const playerBeingSold = props.nominatedPlayer
+    if (props.nominatedPlayer===null){
         return(
             <div>
                 <h1>{props.turn.owner} is nominating...</h1>

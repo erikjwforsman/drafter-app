@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "../AppStyles.module.css"
 import {rosterInfo, teamInfo, validateBid, bidButtonDisabled, nominateButtonDisabled} from "../utils/teamUtils"
 import {useMutation} from "@apollo/client"
@@ -23,7 +23,7 @@ const SelfInfo = (props) => {
             price: props.nominatedPlayer.currentPrice
         }
         await sellPlayer({variables: soldPlayer})
-        await props.start(true) //Turha await?
+        props.start(true)
     }
 
     const bidPlusOne = async(team) => {
@@ -66,9 +66,8 @@ const SelfInfo = (props) => {
             
             {props.manager.owner==="Erik" &&
                 <div>
-                    <h2>Commish tools</h2>
-                    <button disabled={props.xfinalizeSaleButton} onClick={()=>finalizeSale()}>Finalize sale</button>
-                    <h2>Manager control</h2>
+                    <h2>Commish tools <button disabled={props.xfinalizeSaleButton} onClick={()=>finalizeSale()}>Finalize sale</button></h2>
+                    
                     { props.teams.map(t => 
                         <p className={styles.Mini} key={t.id}>
                             {t.owner} 

@@ -103,13 +103,6 @@ export const ADD_TEAM = gql`
     }
 `
 
-// export const CHANGE_PROPOSER = gql`
-//     mutation changeProposer($current:Int){
-//         changeProposer(current:$current){
-//             current
-//         }
-//     }
-// `
 export const CHANGE_PROPOSER = gql`
     mutation changeProposer{
         changeProposer{

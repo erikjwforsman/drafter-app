@@ -5,7 +5,6 @@ import {LOGIN} from "../graphql/queries"
 const LoginForm = (props) => {
     const [owner, setOwner] = useState("")
     const [password, setPassword] = useState("")
-    // const mobile = true
     const [login, result] = useMutation(LOGIN)
     const [checked, setChecked] = useState(false)
 

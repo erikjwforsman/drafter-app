@@ -6,11 +6,6 @@ import styles from "../AppStyles.module.css"
 const SingleTeam = (props) => {
     const info = teamInfo(props.team.players.length, props.team.salary)
 
-    //Kaiketi turha? Lopuksi poistoon
-    if (!props){
-        return <div>Testi onnistui</div>
-    }
-
     return (
         <div className={styles.TeamInfoStyle}>
             <h3 className={styles.MiniDown}>Owner: {props.team.owner}</h3>

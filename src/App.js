@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react"
 import {useApolloClient} from "@apollo/client";
-// import {GET_ALL} from "./graphql/queries";
-// import SubApp from "./components/SubApp";
 import SignedIn from "./components/SignedIn";
 import LoginForm from "./components/LoginForm"
 
@@ -9,7 +7,6 @@ const App = () => {
   const [token, setToken] = useState(null)
   const [manager, setOwner] = useState(null)
   const [mobileView, setMobileView] = useState(false)
-  console.log(mobileView)
   const client = useApolloClient()
   
 
@@ -26,18 +23,15 @@ const App = () => {
       setOwner(ownerH)
     }
 
-    if(mobileOn) {
-      console.log(mobileOn)
+    if(mobileOn===true) {
+      setMobileView(mobileOn)
     }
   }, [])
   
-
   if (!token | !manager) {
     return (<LoginForm setToken={setToken} setOwner={setOwner} setMobileView={setMobileView}/>)
   }
   
-  console.log(mobileView)
-
   const logOut = () => {
     setToken(null)
     setOwner(null)
