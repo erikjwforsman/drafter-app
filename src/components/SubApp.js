@@ -67,6 +67,7 @@ const SubApp = (props) => {
   }
     
   //Tee kunnon mobileView-komponentti
+  queue.forEach(p => mapped.includes(p.id) ? callBackRemove(p.id) : console.log(""))
 
   if(props.mobileView){
     return(<MobileView 
