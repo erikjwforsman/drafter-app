@@ -4,7 +4,7 @@ import AuctionView from "./AuctionView";
 import {useMutation} from "@apollo/client"
 import {CHANGE_BID, SELL_PLAYER} from "../graphql/queries"
 import {teamInfo, validateBid, bidButtonDisabled} from "../utils/teamUtils"
-
+// älämölö
 const AuctionComponent = (props) => {
     let filteredQueue = props.playerQueue.filter((value, index) => props.playerQueue.indexOf(value) === index)
     const [bid]=useMutation(CHANGE_BID)
